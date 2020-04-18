@@ -1,0 +1,17 @@
+<div class="table__wrapper">
+    <div class="table__wrapper_header">
+        <span class="table__wrapper_title">Despeses Fixes</span>
+    </div>
+    <div class="table">
+        <div class="table__header">
+            <span>Concepte</span>
+            <span>Import</span>
+        </div>
+        <div class="table__content">
+            <div class="table__item" *ngFor="let despesaFixa of despesesFixes">
+                <span>{{despesaFixa.descripcio}}</span>
+                <span>{{despesaFixa.import}}</span>
+            </div>
+        </div>
+    </div>
+</div>
