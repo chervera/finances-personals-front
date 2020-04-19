@@ -1,4 +1,11 @@
 <div class="page">
-    <h1>dashboard</h1>
-    <app-despeses-fixes [despesesFixes]="despesesFixes$ | async"></app-despeses-fixes>
+    <div class="page__header">
+        <span class="page__title">dashboard</span>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-despeses-fixes-list [despesesFixes]="despesesFixes$ | async"></app-despeses-fixes-list>
+        </div>
+    </div>
+
 </div>

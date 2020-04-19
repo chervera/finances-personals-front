@@ -1,1 +1,23 @@
-<p>despeses-fixes works!</p>
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Despeses fixes</span>
+        <div class="page__actions">
+            <a class="page__action" routerLink="/despeses-fixes/create">Afegir despesa fixa</a>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-despeses-fixes-list [despesesFixes]="despesesFixes$ | async" (edit)="onEdit($event)">
+            </app-despeses-fixes-list>
+        </div>
+        <div class="panel__footer">
+            <div class="panel__footer__item">
+                Exportar
+            </div>
+            <div class="panel__footer__item">
+                Paginació
+            </div>
+        </div>
+    </div>
+
+</div>

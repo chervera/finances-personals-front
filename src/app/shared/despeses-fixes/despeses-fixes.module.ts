@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DespesesFixesComponent } from './components/despeses-fixes/despeses-fixes.component';
+import { DespesesFixesListComponent } from './components/despeses-fixes/despeses-fixes-list.component';
+
 
 
 
 @NgModule({
-  declarations: [DespesesFixesComponent],
+  declarations: [DespesesFixesListComponent],
   imports: [
     CommonModule
   ],
-  exports: [DespesesFixesComponent]
+  exports: [DespesesFixesListComponent]
 })
 export class DespesesFixesModule { }

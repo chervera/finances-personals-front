@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
+import { DespesaFixa } from '../model/despesa-fixa.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,16 @@ export class DespesesFixesApiService {
         "mesFi": 4
       }
     ]);
+  }
+
+  public find(id: string): Observable<DespesaFixa> {
+    return of({
+      "dataInsercio": null,
+      "id": 1,
+      "import": 150,
+      "descripcio": "test despesa fixa",
+      "mesInici": 0,
+      "mesFi": 0
+    });
   }
 }

@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+    <div class="form">
+        <p>
+            Form Status: {{ form.status }}
+        </p>
+        <div class="input__group">
+            <label for="descripcio">Descripció</label>
+            <input id="descripcio" formControlName="descripcio" required />
+        </div>
+    </div>
+</form>

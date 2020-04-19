@@ -7,7 +7,16 @@ const routes: Routes = [
   {
     path: '',
     component: DespesesFixesContainer
-  }
+  },
+  {
+    path: 'create',
+    loadChildren: () => import('./containers/despesa-fixa/despesa-fixa.module').then(m => m.DespesaFixaModule)
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./containers/despesa-fixa/despesa-fixa.module').then(m => m.DespesaFixaModule)
+  },
+
 ];
 
 @NgModule({

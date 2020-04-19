@@ -1,0 +1,19 @@
+<div class="table__wrapper">
+    <div class="table__wrapper_header">
+        <span class="table__wrapper_title">Despeses Fixes</span>
+    </div>
+    <div class="table">
+        <div class="table__header">
+            <span class="table__cell">Concepte</span>
+            <span class="table__cell">Import</span>
+            <span class="table__cell">Accions</span>
+        </div>
+        <div class="table__item" *ngFor="let despesaFixa of despesesFixes">
+            <span class="table__cell">{{despesaFixa.descripcio}}</span>
+            <span class="table__cell">{{despesaFixa.import}}</span>
+            <div class="table__cell">
+                <button (click)="onEdit(despesaFixa.id)" class=" link">editar</button>
+            </div>
+        </div>
+    </div>
+</div>

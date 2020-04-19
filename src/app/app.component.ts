@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { requestDespesesFixes } from './core/store/core.actions';
+import { requestDespesesFixes, toggleIsMenuShowed } from './core/store/core.actions';
+import * as CoreSelectors from 'src/app/core/store/core.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
+
+  isMenuShowed$: Observable<boolean> = this.store.select(CoreSelectors.selectIsMenuShowed);
 
   constructor(
     private store: Store
@@ -15,6 +20,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(requestDespesesFixes());
+  }
+
+  toggleMenu() {
+    this.store.dispatch(toggleIsMenuShowed());
   }
 
 }

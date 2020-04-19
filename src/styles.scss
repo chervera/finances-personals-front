@@ -1,1 +1,242 @@
-/* You can add global styles to this file, and also import other style files */
+$distance-s: 8px;
+$distance-m: 16px;
+$distance-l: 32px;
+
+$font-size-s: 14px;
+$font-size-m: 16px;
+$font-size-l: 20px;
+$font-size-xl: 26px;
+
+$font-color: #333;
+
+$color-main: #207ad3;
+$color-secundary: #585858;
+$color-secundary-light: #f6f6f6;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    color: $font-color;
+    padding: 0;
+    margin: 0;
+}
+
+.link {
+    color: $color-main;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.main-wrapper {
+    display: flex;
+}
+
+.nav {
+    padding-top: $distance-m;
+    width: 94px;
+    transition: all 500ms;
+    overflow: hidden;
+
+    .nav__menu__link {
+        color: $font-color;
+        text-decoration: none;
+        position: relative;
+        padding: $distance-s 0 $distance-s ($distance-l * 2);
+        display: inline-block;
+        color: transparent;
+        white-space: nowrap;
+        transition: all 500ms;
+
+        &:hover {
+            background: $color-secundary-light;
+        }
+
+        &::before {
+            content: " ";
+            display: block;
+            background: url("assets/img/menu-item.jpg");
+            height: 16px;
+            width: 16px;
+            position: absolute;
+            bottom: 12px;
+            left: $distance-l;
+        }
+    }
+
+    &.opened {
+        width: 304px;
+        transition: all 500ms;
+        .nav__menu__link {
+            color: $font-color;
+        }
+    }
+}
+
+.nav__menu {
+    list-style: none;
+    padding-left: 0;
+}
+
+.page-wrapper {
+    width: 100%;
+}
+
+.header {
+    background: #585858;
+    padding: $distance-l;
+    color: #fff;
+    position: relative;
+}
+
+.header__menu-button {
+    height: $font-size-xl;
+    width: $font-size-xl;
+    display: inline-block;
+    position: relative;
+    margin-right: $distance-m;
+    background: none;
+    border: none;
+    outline: none;
+
+    .menu_button__icon,
+    &::after,
+    &::before {
+        position: absolute;
+        content: " ";
+        height: 4px;
+        background: #fff;
+        display: block;
+        left: 0;
+        right: 0;
+        border-radius: 1px;
+        transition: all 500ms;
+    }
+
+    .menu_button__icon {
+        opacity: 1;
+        margin-top: -2px;
+    }
+
+    &::after {
+        bottom: 0;
+    }
+    &::before {
+        top: 0;
+    }
+
+    &.opened {
+        .menu_button__icon {
+            opacity: 0;
+        }
+        &::after {
+            transform: rotate(-45deg);
+            top: 50%;
+            margin-top: -2px;
+        }
+
+        &::before {
+            transform: rotate(45deg);
+            top: 50%;
+            margin-top: -2px;
+        }
+    }
+}
+
+.header__user {
+    position: absolute;
+    right: $distance-m;
+    line-height: $font-size-xl;
+}
+
+.header__title {
+    font-size: $font-size-xl;
+}
+
+.page {
+    background: $color-secundary-light;
+    padding: $distance-m;
+}
+
+.page__header {
+    display: flex;
+    justify-content: space-between;
+    padding: $distance-l $distance-m $distance-m;
+}
+
+.page__title {
+    font-size: $font-size-l;
+    font-weight: 600;
+    margin-left: $distance-m;
+    display: inline-block;
+}
+
+.page__actions {
+    vertical-align: bottom;
+}
+
+.page__action {
+    @extend .link;
+}
+
+.panel {
+    background: #fff;
+    padding: $distance-m;
+}
+
+.table__wrapper {
+}
+
+.table__wrapper_header {
+    border-bottom: 1px solid #ececec;
+    padding-bottom: $distance-s;
+    margin-left: $distance-m;
+}
+
+.table__wrapper_title {
+    font-weight: 600;
+}
+
+.table {
+    display: table;
+    width: 100%;
+}
+
+.table__header {
+    background: #dbe7f4;
+    width: 100%;
+    display: table-row;
+
+    .table__cell {
+        padding: $distance-l $distance-m;
+    }
+}
+
+.table__item {
+    display: table-row;
+    border-bottom: 1px solid #ececec;
+}
+
+.table__cell {
+    display: table-cell;
+    padding: $distance-m;
+}
+
+@media (max-width: 575.98px) {
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+}

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import * as CoreSelectors from 'src/app/core/store/core.selectors';
+import { Store } from '@ngrx/store';
+import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-despeses-fixes',
@@ -7,9 +14,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DespesesFixesContainer implements OnInit {
 
-  constructor() { }
+  despesesFixes$: Observable<DespesaFixa[]> = this.store.select(CoreSelectors.selectDespesesFixes);
+
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+
+  }
+
+  onEdit(id: number) {
+    this.router.navigate(['/despeses-fixes/' + id]);
   }
 
 }
