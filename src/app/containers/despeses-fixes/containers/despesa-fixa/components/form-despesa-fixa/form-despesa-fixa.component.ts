@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   selector: 'app-form-despesa-fixa',
   templateUrl: './form-despesa-fixa.component.html',
   styleUrls: ['./form-despesa-fixa.component.scss'],
-
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormDespesaFixaComponent implements OnInit, OnChanges {
 
@@ -34,6 +34,10 @@ export class FormDespesaFixaComponent implements OnInit, OnChanges {
       mesInici: [''],
       mesFi: [''],
     });
+  }
+
+  public getValue(): DespesaFixa {
+    return this.form.value;
   }
 
 

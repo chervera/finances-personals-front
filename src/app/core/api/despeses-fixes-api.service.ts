@@ -36,8 +36,18 @@ export class DespesesFixesApiService {
       "id": 1,
       "import": 150,
       "descripcio": "test despesa fixa",
-      "mesInici": 0,
-      "mesFi": 0
+      "mesFi": 12
+    });
+  }
+
+  public save(despesaFixa: DespesaFixa) {
+    console.log(despesaFixa);
+    return of({
+      "dataInsercio": null,
+      "id": 1,
+      "import": 150,
+      "descripcio": "test despesa fixa",
+      "mesFi": 12
     });
   }
 }

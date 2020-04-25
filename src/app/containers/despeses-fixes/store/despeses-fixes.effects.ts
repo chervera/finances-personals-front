@@ -4,6 +4,7 @@ import { map, mergeMap, catchError, switchMap, concatMap, exhaustMap } from 'rxj
 import { EMPTY, Observable } from 'rxjs';
 import { DespesesFixesApiService } from 'src/app/core/api/despeses-fixes-api.service';
 import { ActionTypes } from './despeses-fixes.actions';
+import { ActionTypes as CoreActionTypes, requestDespesesFixes } from 'src/app/core/store/core.actions';
 import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
 import { Action } from '@ngrx/store';
 import * as despesesFixesActions from './despeses-fixes.actions'
@@ -21,8 +22,19 @@ export class DespesesFixesEffects {
             ofType(ActionTypes.REQUEST_DESPESA_FIXA),
             exhaustMap((action: { payload }) =>
                 this.api.find(action.payload).pipe(
-                    map(despesesFixes => ({ type: ActionTypes.SET_DESPESA_FIXA, payload: despesesFixes })),
+                    map((despesaFixa: DespesaFixa) => despesesFixesActions.setDespesaFixa({ payload: despesaFixa })),
                     catchError(() => EMPTY)
                 ))
         ));
+
+    requestSaveDespesaFixa$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ActionTypes.REQUEST_SAVE_DESPESA_FIXA),
+            map((action: { payload }) => action.payload),
+            concatMap((despesaFixa: DespesaFixa) => this.api.save(despesaFixa).pipe(
+                map(() => despesesFixesActions.createDespesaFixaSuccess()),
+                catchError(() => EMPTY))
+            )
+        )
+    );
 }

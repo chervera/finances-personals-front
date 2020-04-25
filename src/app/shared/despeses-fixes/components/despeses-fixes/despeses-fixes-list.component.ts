@@ -10,6 +10,7 @@ export class DespesesFixesListComponent implements OnInit {
 
   @Input() public despesesFixes: DespesaFixa[];
   @Output() edit = new EventEmitter<number>();
+  @Output() delete = new EventEmitter<number>();
 
   constructor() { }
 
@@ -18,6 +19,10 @@ export class DespesesFixesListComponent implements OnInit {
 
   onEdit(id: number) {
     this.edit.emit(id);
+  }
+
+  onDelete(id: number) {
+    this.delete.emit(id);
   }
 
 }

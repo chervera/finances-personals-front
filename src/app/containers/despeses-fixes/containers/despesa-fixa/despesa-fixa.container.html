@@ -8,9 +8,10 @@
         </div>
         <div class="panel__footer">
             <div class="page__actions">
-                <a class="page__action" routerLink="/despeses-fixes">Cancelar</a>
+                <button class="page__action button" (click)="save()"
+                    [disabled]="!formComponent?.form.valid">Guardar</button>
+                <a class="page__action button button--secondary" routerLink="/despeses-fixes">Cancelar</a>
             </div>
         </div>
     </div>
-
 </div>

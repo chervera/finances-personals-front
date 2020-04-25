@@ -1,11 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { requestDespesaFixa, createDespesaFixa } from '../../store/despeses-fixes.actions';
+import { requestDespesaFixa, createDespesaFixa, requestSaveDespesaFixa } from '../../store/despeses-fixes.actions';
 import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
 import { Observable } from 'rxjs';
 import { selectDespesaFixa } from '../../store/despeses-fixes.selectors';
-import { tap } from 'rxjs/operators';
+import { tap, map, take } from 'rxjs/operators';
+import { FormDespesaFixaComponent } from './components/form-despesa-fixa/form-despesa-fixa.component';
+import { routerNavigationAction } from '@ngrx/router-store';
+import { Actions, ofType } from '@ngrx/effects';
+import { ActionTypes } from './../../store/despeses-fixes.actions';
 
 @Component({
   selector: 'app-despesa-fixa',
@@ -15,11 +19,15 @@ import { tap } from 'rxjs/operators';
 })
 export class DespesaFixaContainer implements OnInit {
 
+  @ViewChild(FormDespesaFixaComponent) formComponent;
+
   despesaFixa$: Observable<DespesaFixa> = this.store.select(selectDespesaFixa);
 
   constructor(
     private store: Store,
     private route: ActivatedRoute,
+    private router: Router,
+    private actions$: Actions
   ) { }
 
   ngOnInit(): void {
@@ -30,6 +38,17 @@ export class DespesaFixaContainer implements OnInit {
         this.store.dispatch(createDespesaFixa());
       }
     });
+
+    this.actions$.pipe(
+      ofType(ActionTypes.CREATE_DESPESA_FIXA_SUCCESS),
+      take(1)
+    ).subscribe(() =>
+      this.router.navigate(['/despeses-fixes'])
+    )
+  }
+
+  save() {
+    this.store.dispatch(requestSaveDespesaFixa({ payload: this.formComponent.getValue() }));
   }
 
 }

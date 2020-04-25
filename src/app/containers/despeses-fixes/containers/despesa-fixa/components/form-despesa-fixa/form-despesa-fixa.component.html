@@ -1,11 +1,20 @@
 <form [formGroup]="form">
     <div class="form">
-        <p>
-            Form Status: {{ form.status }}
-        </p>
-        <div class="input__group">
+        <div class="input-group">
             <label for="descripcio">Descripció</label>
-            <input id="descripcio" formControlName="descripcio" required />
+            <input type="text" id="descripcio" formControlName="descripcio" required />
+        </div>
+        <div class="input-group">
+            <label for="import">Import</label>
+            <input id="import" type="text" formControlName="import" required />
+        </div>
+        <div class="input-group">
+            <label for="mesInici">Mes d'inici</label>
+            <input id="mesInici" type="text" formControlName="mesInici" />
+        </div>
+        <div class="input-group">
+            <label for="mesFi">Mes de fi</label>
+            <input id="mesFi" type="text" formControlName="mesFi" />
         </div>
     </div>
 </form>

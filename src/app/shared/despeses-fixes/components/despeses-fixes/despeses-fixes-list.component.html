@@ -12,7 +12,8 @@
             <span class="table__cell">{{despesaFixa.descripcio}}</span>
             <span class="table__cell">{{despesaFixa.import}}</span>
             <div class="table__cell">
-                <button (click)="onEdit(despesaFixa.id)" class=" link">editar</button>
+                <button (click)="onEdit(despesaFixa.id)" class="link link--icon-edit">editar</button>
+                <button (click)="onDelete(despesaFixa.id)" class="link link--icon-delete link--error">borrar</button>
             </div>
         </div>
     </div>
