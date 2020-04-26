@@ -24,11 +24,14 @@ export class FormDespesaFixaComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.form.patchValue(this.despesaFixa);
+    if (this.despesaFixa) {
+      this.form.patchValue(this.despesaFixa);
+    }
   }
 
   createForm(): FormGroup {
     return this.fb.group({
+      id: [null],
       descripcio: ['', Validators.required],
       import: ['', Validators.required],
       mesInici: [''],

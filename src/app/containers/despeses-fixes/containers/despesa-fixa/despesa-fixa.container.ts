@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { requestDespesaFixa, createDespesaFixa, requestSaveDespesaFixa } from '../../store/despeses-fixes.actions';
+import { requestDespesaFixa, createDespesaFixa, requestSaveDespesaFixa, requestUpdateDespesaFixa } from '../../store/despeses-fixes.actions';
 import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
 import { Observable } from 'rxjs';
 import { selectDespesaFixa } from '../../store/despeses-fixes.selectors';
@@ -10,6 +10,7 @@ import { FormDespesaFixaComponent } from './components/form-despesa-fixa/form-de
 import { routerNavigationAction } from '@ngrx/router-store';
 import { Actions, ofType } from '@ngrx/effects';
 import { ActionTypes } from './../../store/despeses-fixes.actions';
+import { requestDespesesFixes } from 'src/app/core/store/core.actions';
 
 @Component({
   selector: 'app-despesa-fixa',
@@ -40,15 +41,21 @@ export class DespesaFixaContainer implements OnInit {
     });
 
     this.actions$.pipe(
-      ofType(ActionTypes.CREATE_DESPESA_FIXA_SUCCESS),
+      ofType(ActionTypes.CREATE_DESPESA_FIXA_SUCCESS, ActionTypes.UPDATE_DESPESA_FIXA_SUCCESS),
       take(1)
-    ).subscribe(() =>
+    ).subscribe(() => {
+      this.store.dispatch(requestDespesesFixes());
       this.router.navigate(['/despeses-fixes'])
-    )
+    });
   }
 
   save() {
-    this.store.dispatch(requestSaveDespesaFixa({ payload: this.formComponent.getValue() }));
+    const despesaFixa = this.formComponent.getValue();
+    if (despesaFixa.id) {
+      this.store.dispatch(requestUpdateDespesaFixa({ payload: despesaFixa }));
+    } else {
+      this.store.dispatch(requestSaveDespesaFixa({ payload: despesaFixa }));
+    }
   }
 
 }

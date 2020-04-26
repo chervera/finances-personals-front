@@ -1,0 +1,22 @@
+<div class="table__wrapper">
+    <div class="table">
+        <div class="table__header">
+            <span class="table__cell">Mes</span>
+            <span class="table__cell">Despeses Fixes</span>
+            <span class="table__cell">Consums</span>
+            <span class="table__cell">Alimentació</span>
+            <span class="table__cell">Despeses totals</span>
+            <span class="table__cell">Ingressos</span>
+            <span class="table__cell">Total</span>
+        </div>
+        <div class="table__item" *ngFor="let resum of resums">
+            <span class="table__cell">{{resum.descriptionMonth}}</span>
+            <span class="table__cell">{{resum.despesesFixes | currency: 'EUR'}}</span>
+            <span class="table__cell">{{resum.consums | currency: 'EUR'}}</span>
+            <span class="table__cell">{{resum.alimentacio | currency: 'EUR'}}</span>
+            <span class="table__cell">{{resum.despesesTotals | currency: 'EUR'}}</span>
+            <span class="table__cell">{{resum.ingressos | currency: 'EUR'}}</span>
+            <span class="table__cell">{{resum.total | currency: 'EUR'}}</span>
+        </div>
+    </div>
+</div>

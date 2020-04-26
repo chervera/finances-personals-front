@@ -37,4 +37,26 @@ export class DespesesFixesEffects {
             )
         )
     );
+
+    requestUpdateDespesaFixa$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ActionTypes.REQUEST_UPDATE_DESPESA_FIXA),
+            map((action: { payload }) => action.payload),
+            concatMap((despesaFixa: DespesaFixa) => this.api.update(despesaFixa).pipe(
+                map(() => despesesFixesActions.updateDespesaFixaSuccess()),
+                catchError(() => EMPTY))
+            )
+        )
+    );
+
+    requestDeleteDespesaFixa$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ActionTypes.REQUEST_DELETE_DESPESA_FIXA),
+            map((action: { payload }) => action.payload),
+            concatMap((id: number) => this.api.delete(id).pipe(
+                map(() => despesesFixesActions.deleteDespesaFixaSuccess()),
+                catchError(() => EMPTY))
+            )
+        )
+    );
 }

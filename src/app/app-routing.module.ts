@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./containers/dashboard/dashboard.module').then(m => m.DashboardModule)
-  }
+  },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

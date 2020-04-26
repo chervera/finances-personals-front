@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { requestDespesesFixes, toggleIsMenuShowed } from './core/store/core.actions';
+import { requestDespesesFixes, toggleIsMenuShowed, requestIngressos, requestConsums, requestAlimentacio } from './core/store/core.actions';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
 import { Observable } from 'rxjs';
 
@@ -20,6 +20,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(requestDespesesFixes());
+    this.store.dispatch(requestIngressos());
+    this.store.dispatch(requestConsums());
+    this.store.dispatch(requestAlimentacio());
   }
 
   toggleMenu() {
