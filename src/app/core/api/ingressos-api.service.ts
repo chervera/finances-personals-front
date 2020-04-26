@@ -3,6 +3,8 @@ import { of, Observable } from 'rxjs';
 import { DespesaFixa } from '../model/despesa-fixa.model';
 import { HttpClient } from '@angular/common/http';
 import { Ingres } from '../model/ingres.model';
+import { map, delay } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +18,15 @@ export class IngressosApiService {
   ) { }
 
   public findAll(filter): Observable<Ingres[]> {
-    //return this.http.get<Ingres[]>(this.BASE_PATH, { params: filter });
-    return of([
-      {
-        id: 1,
-        concepte: 'Nòmina Carles',
-        import: 1500,
-        data: new Date('2020-04-1')
-      }
-    ]);
+    return this.http.get<Ingres[]>(this.BASE_PATH, { params: filter }).pipe(
+      map((results: Ingres[]) =>
+        results.map((ingres: Ingres) => {
+          ingres.data = new Date(ingres.data);
+          return ingres;
+        }
+        )
+      )
+    );
   }
 
   public find(id: string): Observable<Ingres> {

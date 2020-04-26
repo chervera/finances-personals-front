@@ -1,0 +1,35 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Ingressos</span>
+        <div class="page__actions">
+            <a class="page__action" routerLink="/ingressos/create">Afegir ingres</a>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-filter [filter]="filter$ | async"></app-filter>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="onFilter()">Filtrar</button>
+                <button class="page__action button button--secondary" (click)="onReset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-ingressos-list [ingressos]="ingressos$ | async" (edit)="onEdit($event)" (delete)="onDelete($event)">
+            </app-ingressos-list>
+        </div>
+    </div>
+    <!-- <div class="panel">
+        <div class="panel__header">
+            <div class="panel__title">Evolució dels meus ingressos</div>
+        </div>
+        <div class="panel__content">
+            <app-ingressos-line-chart [despesesFixes]="ingressos$ | async">
+            </app-ingressos-line-chart>
+        </div>
+    </div>
+-->
+</div>

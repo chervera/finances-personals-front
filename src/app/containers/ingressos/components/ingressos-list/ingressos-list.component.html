@@ -1,0 +1,25 @@
+<div class="table__wrapper">
+    <div class="table">
+        <div class="table__header">
+            <span class="table__cell">Concepte</span>
+            <span class="table__cell">Import</span>
+            <span class="table__cell">Data</span>
+            <span class="table__cell table__cell--end">Accions</span>
+        </div>
+        <div class="table__item" *ngIf="!ingressos">
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+        </div>
+        <div class="table__item" *ngFor="let item of ingressos">
+            <span class="table__cell">{{item.concepte}}</span>
+            <span class="table__cell">{{item.import | currency: 'EUR'}}</span>
+            <span class="table__cell">{{item.data | date: 'dd-MM-yyyy'}}</span>
+            <div class="table__cell table__cell--end">
+                <button (click)="onEdit(item.id)" class="link link--icon-edit">editar</button>
+                <button (click)="onDelete(item.id)" class="link link--icon-delete link--error">borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
