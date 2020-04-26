@@ -20,7 +20,9 @@ export class ResumService {
       resum[i] = new Resum();
       resum[i].descriptionMonth = monthsText[i];
       resum[i].despesesFixes = this.generateDespesesFixesByMonth(despesesFixes, i);
-      resum[i].ingressos = this.generateIngressosFixesByMonth(ingressos, i);
+      resum[i].ingressos = this.generateIngressosByMonth(ingressos, i);
+      resum[i].consums = this.generateConsumsByMonth(consums, i);
+      resum[i].alimentacio = this.generateAlimentacionsByMonth(alimentacio, i);
     }
     return resum;
   }
@@ -35,7 +37,7 @@ export class ResumService {
     }, 0);
   }
 
-  private static generateIngressosFixesByMonth(ingressos: Ingres[], month: number): number {
+  private static generateIngressosByMonth(ingressos: Ingres[], month: number): number {
     if (!ingressos) return 0;
     return ingressos.reduce((totalAmount, ingres: Ingres) => {
       if ((ingres.data.getMonth() <= month) && (ingres.data.getMonth() >= month)) {
@@ -43,10 +45,29 @@ export class ResumService {
       }
       return totalAmount;
     }, 0);
+
+  }
+
+  private static generateConsumsByMonth(consums: DespesaConsum[], month: number): number {
+    if (!consums) return 0;
+    return consums.reduce((totalAmount, consum: DespesaConsum) => {
+      if ((consum.data.getMonth() <= month) && (consum.data.getMonth() >= month)) {
+        totalAmount += +consum.import;
+      }
+      return totalAmount;
+    }, 0);
+  }
+
+  private static generateAlimentacionsByMonth(alimentacions: DespesaAlimentacio[], month: number): number {
+    if (!alimentacions) return 0;
+    return alimentacions.reduce((totalAmount, alimentacio: DespesaAlimentacio) => {
+      if ((alimentacio.data.getMonth() <= month) && (alimentacio.data.getMonth() >= month)) {
+        totalAmount += +alimentacio.import;
+      }
+      return totalAmount;
+    }, 0);
   }
 }
-
-
 
 export interface ResumAnual {
   resumsMensuals: Resum;

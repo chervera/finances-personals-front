@@ -2,21 +2,41 @@
     <div class="table">
         <div class="table__header">
             <span class="table__cell">Mes</span>
-            <span class="table__cell">Despeses Fixes</span>
-            <span class="table__cell">Consums</span>
-            <span class="table__cell">Alimentació</span>
-            <span class="table__cell">Despeses totals</span>
-            <span class="table__cell">Ingressos</span>
+            <span class="table__cell table__cell--centered">Despeses Fixes</span>
+            <span class="table__cell table__cell--centered">Consums</span>
+            <span class="table__cell table__cell--centered">Alimentació</span>
+            <span class="table__cell table__cell--centered">Despeses totals</span>
+            <span class="table__cell table__cell--centered">Ingressos</span>
             <span class="table__cell">Total</span>
         </div>
+        <div class="table__item" *ngIf="!resums">
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+        </div>
         <div class="table__item" *ngFor="let resum of resums">
-            <span class="table__cell">{{resum.descriptionMonth}}</span>
-            <span class="table__cell">{{resum.despesesFixes | currency: 'EUR'}}</span>
-            <span class="table__cell">{{resum.consums | currency: 'EUR'}}</span>
-            <span class="table__cell">{{resum.alimentacio | currency: 'EUR'}}</span>
-            <span class="table__cell">{{resum.despesesTotals | currency: 'EUR'}}</span>
-            <span class="table__cell">{{resum.ingressos | currency: 'EUR'}}</span>
-            <span class="table__cell">{{resum.total | currency: 'EUR'}}</span>
+            <span class="table__cell table__cell--featured">{{resum.descriptionMonth}}</span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                {{resum.despesesFixes | currency: 'EUR'}}
+            </span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                {{resum.consums | currency: 'EUR'}}
+            </span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                {{resum.alimentacio | currency: 'EUR'}}
+            </span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                {{resum.despesesTotals | currency: 'EUR'}}
+            </span>
+            <span class="table__cell table__cell--primary">
+                {{resum.ingressos | currency: 'EUR'}}
+            </span>
+            <span class="table__cell"
+                [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">{{resum.total | currency: 'EUR'}}</span>
         </div>
     </div>
 </div>

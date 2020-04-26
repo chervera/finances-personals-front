@@ -13,8 +13,34 @@ $font-color: #333;
 $color-main: #207ad3;
 $color-secundary: #585858;
 $color-secundary-light: #f6f6f6;
+$color-3: #a7e4ff;
+$color-4: #fdc2e1;
+$color-5: #fcdfc7;
+$color-success: #bafec9;
 
 $color-error: #db2516;
+
+@mixin background-gradient {
+    background-image: linear-gradient(90deg, $color-secundary-light 0px, #fff 40px, $color-secundary-light 80px);
+    background-size: 80vw;
+}
+
+@mixin animate-ghost-line {
+    @include background-gradient;
+    animation: ghost-lines 2000ms infinite linear;
+}
+
+@keyframes ghost-lines {
+    0% {
+        background-position: -100px;
+    }
+    40% {
+        background-position: 40vw;
+    }
+    100% {
+        background-position: 60vw;
+    }
+}
 
 * {
     box-sizing: border-box;
@@ -272,7 +298,6 @@ body {
     display: table;
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: $distance-l;
 }
 
 .table__header {
@@ -295,13 +320,38 @@ body {
 
 .table__cell {
     display: table-cell;
-    padding: $distance-m;
+    padding: $distance-s $distance-m;
 
     &--centered {
         text-align: center;
     }
     &--end {
         text-align: end;
+    }
+    &--featured {
+        background: $color-4;
+    }
+    &--primary {
+        background: $color-3;
+    }
+    &--secondary {
+        background: $color-5;
+    }
+    &--success {
+        background: $color-success;
+    }
+    &--error {
+        background: $color-error;
+        color: #fff;
+    }
+    &--ghost {
+        &::after {
+            content: " ";
+            display: block;
+            background: #585858;
+            height: $font-size-m;
+            @include animate-ghost-line;
+        }
     }
 }
 

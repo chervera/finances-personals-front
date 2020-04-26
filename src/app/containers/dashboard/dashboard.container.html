@@ -4,8 +4,37 @@
     </div>
     <div class="panel">
         <div class="panel__content">
+            <app-filter [filter]="filter$ | async"></app-filter>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="onFilter()">Filtrar</button>
+                <button class="page__action button button--secondary" (click)="onReset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Resum anual</span>
+        </div>
+        <div class="panel__content">
             <app-resum [resums]="resums$ | async"></app-resum>
         </div>
     </div>
-
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Despeses i ingressos</span>
+        </div>
+        <div class="panel__content">
+            <app-resum-despeses-ingresos-area [resums]="resums$ | async"></app-resum-despeses-ingresos-area>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Despeses fixes, consums i alimentació</span>
+        </div>
+        <div class="panel__content">
+            <app-resum-despeses-line [resums]="resums$ | async"></app-resum-despeses-line>
+        </div>
+    </div>
 </div>
