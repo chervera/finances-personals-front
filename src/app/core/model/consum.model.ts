@@ -1,4 +1,4 @@
-export interface DespesaConsum {
+export interface Consum {
     id: number;
     tipusId: number;
     import: number;

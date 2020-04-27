@@ -1,4 +1,4 @@
-export interface DespesaAlimentacio {
+export interface Alimentacio {
     id: number;
     import: number;
     supermercatId: number;

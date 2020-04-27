@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ActionTypes } from './core.actions';
 import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
@@ -7,9 +7,11 @@ import { EMPTY } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
 import { Filter } from 'src/app/shared/filter/filter.model';
-import { IngressosApiService } from '../api/ingressos-api.service';
+
 import { ConsumsApiService } from '../api/consums-api.service';
 import { AlimentacioApiService } from '../api/alimentacio-api.service';
+import { IngressosApiService } from '../api/ingressos-api.service';
+import { MastersApiService } from '../api/master-api.service';
 
 
 @Injectable()
@@ -21,6 +23,7 @@ export class CoreEffects {
         private ingressosApi: IngressosApiService,
         private consumsApi: ConsumsApiService,
         private alimentacioApi: AlimentacioApiService,
+        private mastersApi: MastersApiService,
         private store: Store
     ) { }
 
@@ -60,6 +63,24 @@ export class CoreEffects {
         mergeMap(([action, filter]) => this.alimentacioApi.findAll(filter)
             .pipe(
                 map(alimentacions => ({ type: ActionTypes.SET_ALIMENTACIO, payload: alimentacions })),
+                catchError(() => EMPTY)
+            ))
+    ));
+
+    requestTipusAlimentacio = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.REQUEST_MASTERS, ActionTypes.REQUEST_TIPUS_ALIMENTACIO),
+        mergeMap((action) => this.mastersApi.findTipusAlimentacio()
+            .pipe(
+                map(tipusAlimentacions => ({ type: ActionTypes.SET_TIPUS_ALIMENTACIO, payload: tipusAlimentacions })),
+                catchError(() => EMPTY)
+            ))
+    ));
+
+    requestTipusConsum = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.REQUEST_MASTERS, ActionTypes.REQUEST_TIPUS_CONSUM),
+        mergeMap((action) => this.mastersApi.findTipusConsums()
+            .pipe(
+                map(tipusConsums => ({ type: ActionTypes.SET_TIPUS_CONSUM, payload: tipusConsums })),
                 catchError(() => EMPTY)
             ))
     ));

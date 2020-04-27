@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Ingres } from '../model/ingres.model';
 import { DespesaFixa } from '../model/despesa-fixa.model';
-import { DespesaConsum } from '../model/despesa-consum.model';
-import { DespesaAlimentacio } from '../model/despesa-alimentacio.model';
+import { Consum } from '../model/consum.model';
+import { Alimentacio } from '../model/alimentacio.model';
 import { DateService } from './date.service';
 
 @Injectable({
@@ -12,10 +12,10 @@ export class ResumService {
 
   constructor() { }
 
-  static generateResum(ingressos: Ingres[], despesesFixes: DespesaFixa[], consums: DespesaConsum[], alimentacio: DespesaAlimentacio[]): Resum[] {
-    let resum: Resum[] = [];
-    let months = DateService.generateMonthNumbers();
-    let monthsText = DateService.generateMonthText();
+  static generateResum(ingressos: Ingres[], despesesFixes: DespesaFixa[], consums: Consum[], alimentacio: Alimentacio[]): Resum[] {
+    const resum: Resum[] = [];
+    const months = DateService.generateMonthNumbers();
+    const monthsText = DateService.generateMonthText();
     for (let i = 0; i < months.length; i++) {
       resum[i] = new Resum();
       resum[i].descriptionMonth = monthsText[i];
@@ -48,9 +48,9 @@ export class ResumService {
 
   }
 
-  private static generateConsumsByMonth(consums: DespesaConsum[], month: number): number {
+  private static generateConsumsByMonth(consums: Consum[], month: number): number {
     if (!consums) return 0;
-    return consums.reduce((totalAmount, consum: DespesaConsum) => {
+    return consums.reduce((totalAmount, consum: Consum) => {
       if ((consum.data.getMonth() <= month) && (consum.data.getMonth() >= month)) {
         totalAmount += +consum.import;
       }
@@ -58,9 +58,9 @@ export class ResumService {
     }, 0);
   }
 
-  private static generateAlimentacionsByMonth(alimentacions: DespesaAlimentacio[], month: number): number {
+  private static generateAlimentacionsByMonth(alimentacions: Alimentacio[], month: number): number {
     if (!alimentacions) return 0;
-    return alimentacions.reduce((totalAmount, alimentacio: DespesaAlimentacio) => {
+    return alimentacions.reduce((totalAmount, alimentacio: Alimentacio) => {
       if ((alimentacio.data.getMonth() <= month) && (alimentacio.data.getMonth() >= month)) {
         totalAmount += +alimentacio.import;
       }

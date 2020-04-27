@@ -1,42 +1,42 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
-import { DespesaFixa } from '../model/despesa-fixa.model';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Ingres } from '../model/ingres.model';
-import { DespesaConsum } from '../model/despesa-consum.model';
+import { Consum } from '../model/consum.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsumsApiService {
 
-  readonly BASE_PATH = "/api/v1/consums";
+  readonly BASE_PATH = '/api/v1/consums';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  public findAll(filter): Observable<DespesaConsum[]> {
-    //return this.http.get<Ingres[]>(this.BASE_PATH, { params: filter });
-    return of([
-      {
-        id: 1,
-        import: 1500,
-        tipusId: 1,
-        data: new Date('2020-04-1')
-      }
-    ]);
+  public findAll(filter): Observable<Consum[]> {
+    return this.http.get<Consum[]>(this.BASE_PATH, { params: filter }).pipe(
+      map((results: Consum[]) =>
+        results.map((consum: Consum) => {
+          consum.data = new Date(consum.data);
+          return consum;
+        }
+        )
+      )
+    );
   }
 
-  public find(id: string): Observable<DespesaConsum> {
-    return this.http.get<DespesaConsum>(this.BASE_PATH + '/' + id);
+  public find(id: string): Observable<Consum> {
+    return this.http.get<Consum>(this.BASE_PATH + '/' + id);
   }
 
-  public save(consum: DespesaConsum): Observable<void> {
+  public save(consum: Consum): Observable<void> {
     return this.http.post<void>(this.BASE_PATH, consum);
   }
 
-  public update(consum: DespesaConsum): Observable<void> {
+  public update(consum: Consum): Observable<void> {
     return this.http.put<void>(this.BASE_PATH + '/' + consum.id, consum);
   }
 

@@ -1,43 +1,41 @@
 import { Injectable } from '@angular/core';
-import { of, Observable } from 'rxjs';
-import { DespesaFixa } from '../model/despesa-fixa.model';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Ingres } from '../model/ingres.model';
-import { DespesaConsum } from '../model/despesa-consum.model';
-import { DespesaAlimentacio } from '../model/despesa-alimentacio.model';
+import { Alimentacio } from '../model/alimentacio.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlimentacioApiService {
 
-  readonly BASE_PATH = "/api/v1/alimentacio";
+  readonly BASE_PATH = '/api/v1/alimentacions';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  public findAll(filter): Observable<DespesaConsum[]> {
-    //return this.http.get<Ingres[]>(this.BASE_PATH, { params: filter });
-    return of([
-      {
-        id: 1,
-        import: 300,
-        tipusId: 1,
-        data: new Date('2020-04-1')
-      }
-    ]);
+  public findAll(filter): Observable<Alimentacio[]> {
+    return this.http.get<Alimentacio[]>(this.BASE_PATH, { params: filter }).pipe(
+      map((results: Alimentacio[]) =>
+        results.map((alimentacio: Alimentacio) => {
+          alimentacio.data = new Date(alimentacio.data);
+          return alimentacio;
+        }
+        )
+      )
+    );
   }
 
-  public find(id: string): Observable<DespesaAlimentacio> {
-    return this.http.get<DespesaAlimentacio>(this.BASE_PATH + '/' + id);
+  public find(id: string): Observable<Alimentacio> {
+    return this.http.get<Alimentacio>(this.BASE_PATH + '/' + id);
   }
 
-  public save(alimentacio: DespesaAlimentacio): Observable<void> {
+  public save(alimentacio: Alimentacio): Observable<void> {
     return this.http.post<void>(this.BASE_PATH, alimentacio);
   }
 
-  public update(alimentacio: DespesaAlimentacio): Observable<void> {
+  public update(alimentacio: Alimentacio): Observable<void> {
     return this.http.put<void>(this.BASE_PATH + '/' + alimentacio.id, alimentacio);
   }
 

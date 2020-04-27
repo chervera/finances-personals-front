@@ -3,8 +3,10 @@ import * as CoreActions from './core.actions';
 import { DespesaFixa } from '../model/despesa-fixa.model';
 import { Filter } from 'src/app/shared/filter/filter.model';
 import { Ingres } from '../model/ingres.model';
-import { DespesaConsum } from '../model/despesa-consum.model';
-import { DespesaAlimentacio } from '../model/despesa-alimentacio.model';
+import { Consum } from '../model/consum.model';
+import { Alimentacio } from '../model/alimentacio.model';
+import { TipusConsum } from '../model/tipus-consum.model';
+import { TipusAlimentacio } from '../model/tipus-alimentacio.model';
 
 export interface AppState {
     core: CoreState,
@@ -15,12 +17,18 @@ export interface CoreState {
     mainFilter: Filter;
     despesesFixes?: DespesaFixa[];
     ingressos?: Ingres[];
-    consums?: DespesaConsum[];
-    alimentacions?: DespesaAlimentacio[];
+    consums?: Consum[];
+    alimentacions?: Alimentacio[];
+    masters: MastersState;
 }
 
 export interface UiState {
     isMenuShowed: boolean;
+}
+
+export interface MastersState {
+    tipusAlimentacions?: TipusAlimentacio[];
+    tipusConsums?: TipusConsum[];
 }
 
 export const initialState = {
@@ -29,7 +37,8 @@ export const initialState = {
     },
     mainFilter: {
         year: new Date().getFullYear(),
-    }
+    },
+    masters: {}
 };
 
 const _coreReducer = createReducer(initialState,
@@ -50,6 +59,12 @@ const _coreReducer = createReducer(initialState,
     ),
     on(CoreActions.setAlimentacio, (state, action) =>
         ({ ...state, alimentacions: action.payload })
+    ),
+    on(CoreActions.setTipusAlimentacio, (state, action) =>
+        ({ ...state, masters: { ...state.masters, tipusAlimentacions: action.payload } })
+    ),
+    on(CoreActions.setTipusConsum, (state, action) =>
+        ({ ...state, masters: { ...state.masters, tipusConsums: action.payload } })
     ),
 );
 
