@@ -1,0 +1,16 @@
+<div class="page page--floating">
+    <div class="panel">
+        <div class="panel__header panel__header--featured">
+            <span class="panel__title">Login</span>
+        </div>
+        <div class="panel__content">
+            <app-form-login></app-form-login>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="login()"
+                    [disabled]="!formComponent?.form.valid">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

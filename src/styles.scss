@@ -226,12 +226,24 @@ body {
 .page {
     background: $color-secundary-light;
     padding: $distance-m;
+
+    &--floating{
+        width: 100%;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
 }
 
 .page__header {
+
     display: flex;
     justify-content: space-between;
     padding: $distance-l $distance-m $distance-m;
+
 }
 
 .page__title {
@@ -260,7 +272,6 @@ body {
 
 .panel {
     background: #fff;
-    padding: $distance-m;
 }
 
 .panel + .panel {
@@ -269,14 +280,26 @@ body {
 .panel__header {
     display: flex;
     justify-content: space-between;
-    padding-bottom: $distance-m;
+    padding: $distance-m;
+
+    &--featured{
+        background: $color-main;
+        color: #fff;
+        vertical-align: middle;
+        padding: $distance-m;
+
+    }
 }
 .panel__title {
     font-size: $font-size-m;
     font-weight: 600;
 }
+.panel__content{
+    padding: $distance-m;
+}
 .panel__footer {
     display: flex;
+    padding: $distance-m;
     justify-content: space-between;
 }
 
@@ -360,6 +383,13 @@ body {
     margin-left: -$distance-m;
     margin-right: -$distance-m;
     flex-direction: column;
+
+    &--column{
+        .input-group{
+            flex: 1 1 100%;
+            max-width: 100%;
+        }
+    }
 }
 .input-group {
     margin-bottom: $distance-m;
@@ -369,7 +399,7 @@ body {
         margin-left: $distance-m;
         margin-bottom: $distance-s;
     }
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
         padding: $distance-s;
         width: 100%;
         background: $color-secundary-light;

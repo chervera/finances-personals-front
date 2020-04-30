@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+    <div class="form form--column">
+        <div class="input-group">
+            <label for="username">Usuari</label>
+            <input type="text" id="username" formControlName="username" required />
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" formControlName="password" required />
+        </div>
+    </div>
+</form>

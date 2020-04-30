@@ -7,12 +7,14 @@ import { Consum } from '../model/consum.model';
 import { Alimentacio } from '../model/alimentacio.model';
 import { TipusConsum } from '../model/tipus-consum.model';
 import { TipusAlimentacio } from '../model/tipus-alimentacio.model';
+import { User } from '../model/user.model';
 
 export interface AppState {
-    core: CoreState,
+    core: CoreState;
 }
 
 export interface CoreState {
+    authState: AuthState;
     uiState: UiState;
     mainFilter: Filter;
     despesesFixes?: DespesaFixa[];
@@ -24,6 +26,11 @@ export interface CoreState {
 
 export interface UiState {
     isMenuShowed: boolean;
+}
+
+export interface AuthState {
+    user: User;
+    token: string;
 }
 
 export interface MastersState {

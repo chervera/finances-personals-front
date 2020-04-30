@@ -6,6 +6,7 @@ import { Consum } from '../model/consum.model';
 import { Alimentacio } from '../model/alimentacio.model';
 import { TipusAlimentacio } from '../model/tipus-alimentacio.model';
 import { TipusConsum } from '../model/tipus-consum.model';
+import { User } from '../model/user.model';
 
 export enum ActionTypes {
     TOGGLE_IS_MENU_SHOWED = `[CORE] Toggle isMenuShowed`,
@@ -23,7 +24,9 @@ export enum ActionTypes {
     SET_TIPUS_ALIMENTACIO = `[CORE] Set tipus alimentació`,
     REQUEST_TIPUS_CONSUM = `[CORE] Request tipus consum`,
     SET_TIPUS_CONSUM = `[CORE] Set tipus consum`,
-
+    REQUEST_LOGIN = `[CORE] Request login`,
+    SET_USER = `[CORE] Set user`,
+    SET_TOKEN = `[CORE] Set token`,
 }
 
 export const toggleIsMenuShowed = createAction(ActionTypes.TOGGLE_IS_MENU_SHOWED);
@@ -41,5 +44,8 @@ export const requestTipusAlimentacio = createAction(ActionTypes.REQUEST_TIPUS_AL
 export const setTipusAlimentacio = createAction(ActionTypes.SET_TIPUS_ALIMENTACIO, props<{ payload: TipusAlimentacio[] }>());
 export const requestTipusConsum = createAction(ActionTypes.REQUEST_TIPUS_CONSUM);
 export const setTipusConsum = createAction(ActionTypes.SET_TIPUS_CONSUM, props<{ payload: TipusConsum[] }>());
+export const requestLogin = createAction(ActionTypes.REQUEST_LOGIN, props<{ payload: { username: string, password: string } }>());
+export const setUser = createAction(ActionTypes.SET_USER, props<{ payload: User }>());
+export const setToken = createAction(ActionTypes.SET_TOKEN, props<{ payload: string[] }>());
 
 
