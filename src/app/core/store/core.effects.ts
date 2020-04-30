@@ -12,6 +12,7 @@ import { ConsumsApiService } from '../api/consums-api.service';
 import { AlimentacioApiService } from '../api/alimentacio-api.service';
 import { IngressosApiService } from '../api/ingressos-api.service';
 import { MastersApiService } from '../api/master-api.service';
+import { AuthApiService } from 'src/app/containers/auth/api/auth-api.service';
 
 
 @Injectable()
@@ -24,6 +25,7 @@ export class CoreEffects {
         private consumsApi: ConsumsApiService,
         private alimentacioApi: AlimentacioApiService,
         private mastersApi: MastersApiService,
+        private authApi: AuthApiService,
         private store: Store
     ) { }
 
@@ -81,6 +83,15 @@ export class CoreEffects {
         mergeMap((action) => this.mastersApi.findTipusConsums()
             .pipe(
                 map(tipusConsums => ({ type: ActionTypes.SET_TIPUS_CONSUM, payload: tipusConsums })),
+                catchError(() => EMPTY)
+            ))
+    ));
+
+    requestLogin = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.REQUEST_LOGIN),
+        mergeMap((action: { payload: { username: string, password: string } }) => this.authApi.login(action.payload.username, action.payload.password)
+            .pipe(
+                map(token => ({ type: ActionTypes.SET_TOKEN, payload: token })),
                 catchError(() => EMPTY)
             ))
     ));
