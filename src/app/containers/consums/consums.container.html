@@ -1,0 +1,45 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Consums</span>
+        <div class="page__actions">
+            <a class="page__action" routerLink="/consums/create">Afegir despesa en consum</a>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-filter [filter]="filter$ | async"></app-filter>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="onFilter()">Filtrar</button>
+                <button class="page__action button button--secondary" (click)="onReset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Resum despeses en consums</span>
+        </div>
+        <div class="panel__content">
+            <app-consums-resum [resum]="resum$ | async"></app-consums-resum>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Resum despeses en consums</span>
+        </div>
+        <div class="panel__content">
+            <app-consums-line-chart [resum]="resum$ | async"></app-consums-line-chart>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Ultimes despeses en alimentació</span>
+        </div>
+        <div class="panel__content">
+            <app-consums-list [consums]="consums$ | async" (edit)="onEdit($event)" (delete)="onDelete($event)">
+            </app-consums-list>
+        </div>
+    </div>
+
+</div>

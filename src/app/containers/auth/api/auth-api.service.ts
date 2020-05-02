@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/core/model/user.model';
 import { shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class AuthApiService {
     private http: HttpClient
   ) { }
 
-  login(email: string, password: string) {
-    return this.http.post<User>(this.BASE_PATH + 'login', { email, password }).pipe(
+  login(username: string, password: string): Observable<{ access_token: string }> {
+    return this.http.post<{ access_token: string }>(this.BASE_PATH + 'login', { username, password }).pipe(
       shareReplay(1)
     );
   }

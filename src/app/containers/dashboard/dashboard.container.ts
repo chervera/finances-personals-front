@@ -24,7 +24,7 @@ export class DashboardContainer implements OnInit {
 
   despesesFixes$: Observable<DespesaFixa[]> = this.store.select(CoreSelectors.selectDespesesFixes).pipe(filter(data => data != null));
   ingressos$: Observable<Ingres[]> = this.store.select(CoreSelectors.selectIngressos).pipe(filter(data => data != null));
-  alimentacions$: Observable<Alimentacio[]> = this.store.select(CoreSelectors.selectAlimentacio).pipe(filter(data => data != null));
+  alimentacions$: Observable<Alimentacio[]> = this.store.select(CoreSelectors.selectAlimentacions).pipe(filter(data => data != null));
   consums$: Observable<Consum[]> = this.store.select(CoreSelectors.selectConsums).pipe(filter(data => data != null));
   filter$: Observable<Filter> = this.store.select(CoreSelectors.selectMainFilter);
 
@@ -42,10 +42,6 @@ export class DashboardContainer implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.resums$.subscribe((resum) => {
-      console.log('resum');
-      console.table(resum);
-    })
   }
 
   onFilter() {

@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class AlimentacioApiService {
+export class AlimentacionsApiService {
 
   readonly BASE_PATH = '/api/v1/alimentacions';
 

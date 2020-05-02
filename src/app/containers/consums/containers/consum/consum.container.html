@@ -1,0 +1,18 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Consum</span>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-form-consum [consum]="consum$ | async" [tipusConsums]="tipusConsums$ | async">
+            </app-form-consum>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="save()"
+                    [disabled]="!formComponent?.form.valid">Guardar</button>
+                <a class="page__action button button--secondary" routerLink="/consums">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>

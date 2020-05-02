@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+    <div class="form">
+        <div class="input-group">
+            <label for="import">Import</label>
+            <input id="import" type="text" formControlName="import" required />
+        </div>
+        <div class="input-group">
+            <label for="import">Data</label>
+            <input id="data" type="text" formControlName="data" required />
+        </div>
+        <div class="input-group">
+            <label for="year">Tipus</label>
+            <select formControlName="tipusConsumId" required>
+                <option *ngFor="let tipusConsum of tipusConsums" value="{{tipusConsum.id}}">
+                    {{tipusConsum.descripcio}}</option>
+            </select>
+        </div>
+    </div>
+</form>

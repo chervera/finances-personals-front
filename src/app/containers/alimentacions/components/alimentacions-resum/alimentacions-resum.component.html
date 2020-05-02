@@ -1,0 +1,17 @@
+<div class="table__wrapper">
+    <div class="table">
+        <div class="table__header">
+            <span class="table__cell">Mes</span>
+            <span class="table__cell" *ngFor="let tipus of resum.types">{{tipus.descripcio}}</span>
+        </div>
+        <div class="table__item" *ngIf="!resum">
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost" *ngFor="let tipus of resum.types"></span>
+        </div>
+        <div class="table__item" *ngFor="let line of resum.lines">
+            <span class="table__cell">{{line.month}}</span>
+            <span class="table__cell"
+                *ngFor="let total of line.totals | keyvalue">{{total.value | currency: 'EUR'}}</span>
+        </div>
+    </div>
+</div>

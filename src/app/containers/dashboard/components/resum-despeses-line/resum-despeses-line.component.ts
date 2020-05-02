@@ -64,7 +64,6 @@ export class ResumDespesesLineComponent extends Chart implements OnInit {
       }]
 
     };
-    console.log(this.chartOptions);
   }
 
   private generateDespesesFixesFromResums(resums: Resum[]): number[] {

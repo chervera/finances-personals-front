@@ -1,0 +1,18 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Alimentacio</span>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-form-alimentacio [alimentacio]="alimentacio$ | async"
+                [tipusAlimentacions]="tipusAlimentacions$ | async"></app-form-alimentacio>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="save()"
+                    [disabled]="!formComponent?.form.valid">Guardar</button>
+                <a class="page__action button button--secondary" routerLink="/alimentacions">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,16 +17,19 @@ export enum ActionTypes {
     SET_INGRESSOS = `[CORE] Set ingressos`,
     REQUEST_CONSUMS = `[CORE] Request consums`,
     SET_CONSUMS = `[CORE] Set consums`,
-    REQUEST_ALIMENTACIO = `[CORE] Request alimentació`,
-    SET_ALIMENTACIO = `[CORE] Set alimentació`,
+    REQUEST_ALIMENTACIONS = `[CORE] Request alimentacions`,
+    SET_ALIMENTACIONS = `[CORE] Set alimentacions`,
     REQUEST_MASTERS = `[CORE] Request masters`,
     REQUEST_TIPUS_ALIMENTACIO = `[CORE] Request tipus alimentació`,
     SET_TIPUS_ALIMENTACIO = `[CORE] Set tipus alimentació`,
     REQUEST_TIPUS_CONSUM = `[CORE] Request tipus consum`,
     SET_TIPUS_CONSUM = `[CORE] Set tipus consum`,
     REQUEST_LOGIN = `[CORE] Request login`,
+    LOGIN_SUCCESS = `[CORE] Login success`,
     SET_USER = `[CORE] Set user`,
     SET_TOKEN = `[CORE] Set token`,
+    INITIATE_TOKEN_FROM_STORAGE = `[CORE] Initiate token from storage`,
+    CLEAR_STATE = `[CORE] Clear state`
 }
 
 export const toggleIsMenuShowed = createAction(ActionTypes.TOGGLE_IS_MENU_SHOWED);
@@ -37,8 +40,8 @@ export const requestIngressos = createAction(ActionTypes.REQUEST_INGRESSOS);
 export const setIngressos = createAction(ActionTypes.SET_INGRESSOS, props<{ payload: Ingres[] }>());
 export const requestConsums = createAction(ActionTypes.REQUEST_CONSUMS);
 export const setConsums = createAction(ActionTypes.SET_CONSUMS, props<{ payload: Consum[] }>());
-export const requestAlimentacio = createAction(ActionTypes.REQUEST_ALIMENTACIO);
-export const setAlimentacio = createAction(ActionTypes.SET_ALIMENTACIO, props<{ payload: Alimentacio[] }>());
+export const requestAlimentacions = createAction(ActionTypes.REQUEST_ALIMENTACIONS);
+export const setAlimentacions = createAction(ActionTypes.SET_ALIMENTACIONS, props<{ payload: Alimentacio[] }>());
 export const requestMasters = createAction(ActionTypes.REQUEST_MASTERS);
 export const requestTipusAlimentacio = createAction(ActionTypes.REQUEST_TIPUS_ALIMENTACIO);
 export const setTipusAlimentacio = createAction(ActionTypes.SET_TIPUS_ALIMENTACIO, props<{ payload: TipusAlimentacio[] }>());
@@ -47,5 +50,8 @@ export const setTipusConsum = createAction(ActionTypes.SET_TIPUS_CONSUM, props<{
 export const requestLogin = createAction(ActionTypes.REQUEST_LOGIN, props<{ payload: { username: string, password: string } }>());
 export const setUser = createAction(ActionTypes.SET_USER, props<{ payload: User }>());
 export const setToken = createAction(ActionTypes.SET_TOKEN, props<{ payload: string[] }>());
+export const loginSuccess = createAction(ActionTypes.LOGIN_SUCCESS);
+export const initiateTokenFromStorage = createAction(ActionTypes.INITIATE_TOKEN_FROM_STORAGE);
+export const clearState = createAction(ActionTypes.CLEAR_STATE);
 
 

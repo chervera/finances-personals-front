@@ -1,4 +1,4 @@
-import { createReducer, on, State } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 import * as CoreActions from './core.actions';
 import { DespesaFixa } from '../model/despesa-fixa.model';
 import { Filter } from 'src/app/shared/filter/filter.model';
@@ -14,8 +14,8 @@ export interface AppState {
 }
 
 export interface CoreState {
-    authState: AuthState;
-    uiState: UiState;
+    auth: AuthState;
+    ui: UiState;
     mainFilter: Filter;
     despesesFixes?: DespesaFixa[];
     ingressos?: Ingres[];
@@ -39,18 +39,19 @@ export interface MastersState {
 }
 
 export const initialState = {
-    uiState: {
+    ui: {
         isMenuShowed: false
     },
     mainFilter: {
         year: new Date().getFullYear(),
     },
-    masters: {}
+    masters: {},
+    auth: {}
 };
 
 const _coreReducer = createReducer(initialState,
     on(CoreActions.toggleIsMenuShowed, (state, action) =>
-        ({ ...state, uiState: { ...state.uiState, isMenuShowed: !state.uiState.isMenuShowed } })
+        ({ ...state, ui: { ...state.ui, isMenuShowed: !state.ui.isMenuShowed } })
     ),
     on(CoreActions.setMainFilter, (state, action) =>
         ({ ...state, mainFilter: action.payload })
@@ -64,7 +65,7 @@ const _coreReducer = createReducer(initialState,
     on(CoreActions.setConsums, (state, action) =>
         ({ ...state, consums: action.payload })
     ),
-    on(CoreActions.setAlimentacio, (state, action) =>
+    on(CoreActions.setAlimentacions, (state, action) =>
         ({ ...state, alimentacions: action.payload })
     ),
     on(CoreActions.setTipusAlimentacio, (state, action) =>
@@ -72,6 +73,15 @@ const _coreReducer = createReducer(initialState,
     ),
     on(CoreActions.setTipusConsum, (state, action) =>
         ({ ...state, masters: { ...state.masters, tipusConsums: action.payload } })
+    ),
+    on(CoreActions.setToken, (state, action) =>
+        ({ ...state, auth: { ...state.auth, token: action.payload } })
+    ),
+    on(CoreActions.setUser, (state, action) =>
+        ({ ...state, auth: { ...state.auth, user: action.payload } })
+    ),
+    on(CoreActions.clearState, (state, action) =>
+        (initialState)
     ),
 );
 

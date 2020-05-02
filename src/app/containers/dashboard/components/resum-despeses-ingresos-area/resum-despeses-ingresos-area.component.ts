@@ -59,7 +59,6 @@ export class ResumDespesesIngresosAreaComponent extends Chart implements OnInit 
       }]
 
     };
-    console.log(this.chartOptions);
   }
 
   private generateDespesesFromResums(resums: Resum[]): number[] {

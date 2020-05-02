@@ -1,6 +1,9 @@
+import { TipusConsum } from './tipus-consum.model';
+
 export interface Consum {
     id: number;
-    tipusId: number;
+    tipusConsumId: number;
+    tipusConsum?: TipusConsum
     import: number;
     data: Date;
 }

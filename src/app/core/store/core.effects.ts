@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ActionTypes } from './core.actions';
-import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
+import * as CoreActions from './core.actions';
+import { map, mergeMap, catchError, withLatestFrom, tap, switchMap, } from 'rxjs/operators';
 import { DespesesFixesApiService } from '../api/despeses-fixes-api.service';
 import { EMPTY } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
-import { Filter } from 'src/app/shared/filter/filter.model';
-
 import { ConsumsApiService } from '../api/consums-api.service';
-import { AlimentacioApiService } from '../api/alimentacio-api.service';
 import { IngressosApiService } from '../api/ingressos-api.service';
 import { MastersApiService } from '../api/master-api.service';
 import { AuthApiService } from 'src/app/containers/auth/api/auth-api.service';
+import { AlimentacionsApiService } from '../api/alimentacions-api.service';
+import { AuthService } from 'src/app/containers/auth/services/auth.service';
 
 
 @Injectable()
@@ -23,9 +23,10 @@ export class CoreEffects {
         private despesesFixesApi: DespesesFixesApiService,
         private ingressosApi: IngressosApiService,
         private consumsApi: ConsumsApiService,
-        private alimentacioApi: AlimentacioApiService,
+        private alimentacionsApi: AlimentacionsApiService,
         private mastersApi: MastersApiService,
         private authApi: AuthApiService,
+        private auth: AuthService,
         private store: Store
     ) { }
 
@@ -59,17 +60,17 @@ export class CoreEffects {
             ))
     ));
 
-    requestAlimentacio$ = createEffect(() => this.actions$.pipe(
-        ofType(ActionTypes.REQUEST_ALIMENTACIO),
+    requestAlimentacions$ = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.REQUEST_ALIMENTACIONS),
         withLatestFrom(this.store.select(CoreSelectors.selectMainFilter)),
-        mergeMap(([action, filter]) => this.alimentacioApi.findAll(filter)
+        mergeMap(([action, filter]) => this.alimentacionsApi.findAll(filter)
             .pipe(
-                map(alimentacions => ({ type: ActionTypes.SET_ALIMENTACIO, payload: alimentacions })),
+                map(alimentacions => ({ type: ActionTypes.SET_ALIMENTACIONS, payload: alimentacions })),
                 catchError(() => EMPTY)
             ))
     ));
 
-    requestTipusAlimentacio = createEffect(() => this.actions$.pipe(
+    requestTipusAlimentacio$ = createEffect(() => this.actions$.pipe(
         ofType(ActionTypes.REQUEST_MASTERS, ActionTypes.REQUEST_TIPUS_ALIMENTACIO),
         mergeMap((action) => this.mastersApi.findTipusAlimentacio()
             .pipe(
@@ -78,7 +79,7 @@ export class CoreEffects {
             ))
     ));
 
-    requestTipusConsum = createEffect(() => this.actions$.pipe(
+    requestTipusConsum$ = createEffect(() => this.actions$.pipe(
         ofType(ActionTypes.REQUEST_MASTERS, ActionTypes.REQUEST_TIPUS_CONSUM),
         mergeMap((action) => this.mastersApi.findTipusConsums()
             .pipe(
@@ -87,12 +88,36 @@ export class CoreEffects {
             ))
     ));
 
-    requestLogin = createEffect(() => this.actions$.pipe(
+    requestLogin$ = createEffect(() => this.actions$.pipe(
         ofType(ActionTypes.REQUEST_LOGIN),
         mergeMap((action: { payload: { username: string, password: string } }) => this.authApi.login(action.payload.username, action.payload.password)
             .pipe(
-                map(token => ({ type: ActionTypes.SET_TOKEN, payload: token })),
+                map((response: { access_token: string }) => response.access_token),
+                tap(token => this.auth.storeToken(token)),
+                switchMap(token => [
+                    { type: ActionTypes.SET_TOKEN, payload: token },
+                    { type: ActionTypes.LOGIN_SUCCESS, payload: token },
+                ]),
                 catchError(() => EMPTY)
             ))
     ));
+
+    initiateTokenFromStorage$ = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.INITIATE_TOKEN_FROM_STORAGE),
+        tap(() => this.store.dispatch(CoreActions.loginSuccess())),
+        map(action => ({ type: ActionTypes.SET_TOKEN, payload: this.auth.retriveToken() }))
+    ));
+
+    initState$ = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.LOGIN_SUCCESS),
+        switchMap(() => [
+            CoreActions.requestDespesesFixes(),
+            CoreActions.requestIngressos(),
+            CoreActions.requestConsums(),
+            CoreActions.requestAlimentacions(),
+            CoreActions.requestMasters()
+        ]
+        )
+    ));
+
 }

@@ -1,0 +1,46 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Alimentacions</span>
+        <div class="page__actions">
+            <a class="page__action" routerLink="/alimentacions/create">Afegir despesa en alimentacio</a>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-filter [filter]="filter$ | async"></app-filter>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="onFilter()">Filtrar</button>
+                <button class="page__action button button--secondary" (click)="onReset()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Resum despeses en alimentació</span>
+        </div>
+        <div class="panel__content">
+            <app-alimentacions-resum [resum]="resum$ | async"></app-alimentacions-resum>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Resum despeses en alimentació</span>
+        </div>
+        <div class="panel__content">
+            <app-alimentacions-line-chart [resum]="resum$ | async"></app-alimentacions-line-chart>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Ultimes despeses en alimentació</span>
+        </div>
+        <div class="panel__content">
+            <app-alimentacions-list [alimentacions]="alimentacions$ | async" (edit)="onEdit($event)"
+                (delete)="onDelete($event)">
+            </app-alimentacions-list>
+        </div>
+    </div>
+
+</div>
