@@ -9,10 +9,31 @@
             <span class="table__cell table__cell--ghost"></span>
             <span class="table__cell table__cell--ghost" *ngFor="let tipus of resum.types"></span>
         </div>
-        <div class="table__item" *ngFor="let line of resum.lines">
+        <div class="table__item" *ngFor="let line of resum.lines; index as i;">
             <span class="table__cell table__cell--featured">{{line.month}}</span>
-            <span class="table__cell table__cell--centered" [ngClass]="{'table__cell--void': total.value==0}"
-                *ngFor="let total of line.totals | keyvalue">{{total.value | currency: 'EUR'}}</span>
+            <span class="table__cell table__cell--centered"
+                [ngClass]="{'table__cell--void': total.value.totalAmount==0, 'table__cell--disabled': (i > 4)}"
+                *ngFor="let total of line.totals | keyvalue">{{total.value.totalAmount | currency: 'EUR'}}</span>
+        </div>
+        <div class="table__footer">
+            <span class="table__cell">Mitja</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.totalAverage | currency: 'EUR'}}</span>
+        </div>
+        <div class="table__footer">
+            <span class="table__cell">Mitja Comanda</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.averageItem | currency: 'EUR'}}</span>
+        </div>
+        <div class="table__footer">
+            <span class="table__cell">Numero Comandes</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.itemCount}}</span>
+        </div>
+        <div class="table__footer">
+            <span class="table__cell">Total</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.total | currency: 'EUR'}}</span>
         </div>
     </div>
 </div>

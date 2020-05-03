@@ -56,8 +56,12 @@ export class ResumDespesesIngresosAreaComponent extends Chart implements OnInit 
         type: 'area',
         name: 'Ingressos',
         color: this.COLOR_INGRES
-      }]
-
+      }],
+      tooltip: {
+        pointFormatter: function () {
+          return this.y.toFixed(2) + '€';
+        }
+      }
     };
   }
 

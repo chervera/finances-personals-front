@@ -47,18 +47,18 @@ export class AlimentacionsLineChartComponent extends Chart implements OnInit, On
           formatter: function () {
             return this.value + ' €';
           }
-        }
+        },
       },
-      series: this.generateSeriesFromResum(resum)
+      series: this.generateSeriesFromResum(resum),
+      tooltip: {
+        pointFormatter: function () {
+          return this.y.toFixed(2) + '€';
+        }
+      }
     };
   }
 
   private generateSeriesFromResum(resum: Resum<TipusAlimentacio>) {
-    /*[{
-      data: this.generateDataFromDespesesFixes(despesesFixes),
-      type: 'line',
-      name: 'Despeses fixes'
-    }]*/
     const series = [];
     resum.types.forEach((tipus: TipusAlimentacio) => {
       const serie = {
@@ -67,7 +67,7 @@ export class AlimentacionsLineChartComponent extends Chart implements OnInit, On
         name: tipus.descripcio
       }
       resum.lines.forEach((line: ResumLine) => {
-        serie.data.push(line.totals.get(tipus.id));
+        serie.data.push(line.totals.get(tipus.id).totalAmount);
       });
       series.push(serie);
     });

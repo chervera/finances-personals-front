@@ -5,13 +5,23 @@ export class Resum<T> {
 
 }
 
-export interface ResumLine {
+export class ResumLine {
     month: string;
-    totals: Map<number, any>
+    totals = new Map<number, ResumValue>();
+    constructor(month: string) {
+        this.month = month;
+    }
+}
+
+export class ResumValue {
+    totalAmount = 0;
+    itemCount = 0;
 }
 
 export class ResumStat {
-    average: number = 0;
-    total: number = 0;
+    totalAverage = 0;
+    total = 0;
+    averageItem = 0;
+    itemCount = 0;
 
 }

@@ -61,7 +61,12 @@ export class ResumDespesesLineComponent extends Chart implements OnInit {
         type: this.SERIE_TYPE_LINE,
         name: 'Alimentació',
         color: this.COLOR_ALIMENTACIONS
-      }]
+      }],
+      tooltip: {
+        pointFormatter: function () {
+          return this.y.toFixed(2) + '€';
+        }
+      }
 
     };
   }

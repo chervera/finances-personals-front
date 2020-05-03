@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resum, ResumLine, ResumStat } from 'src/app/core/model/resum.model';
+import { Resum, ResumLine, ResumStat, ResumValue } from 'src/app/core/model/resum.model';
 import { TipusConsum } from 'src/app/core/model/tipus-consum.model';
 import { Consum } from 'src/app/core/model/consum.model';
 import { DateService } from 'src/app/core/services/date.service';
@@ -18,8 +18,9 @@ export class ConsumsService {
 
     consums.forEach(consum => {
       const month = consum.data.getMonth();
-      const total = resum.lines[month].totals.get(consum.tipusConsumId) + +consum.import;
-      resum.lines[month].totals.set(consum.tipusConsumId, total);
+      const totalAmount = resum.lines[month].totals.get(consum.tipusConsumId).totalAmount + +consum.import;
+      const count = resum.lines[month].totals.get(consum.tipusConsumId).itemCount;
+      resum.lines[month].totals.set(consum.tipusConsumId, { totalAmount, itemCount: count + 1 });
     });
 
     resum.stats = ConsumsService.generateStats(resum);
@@ -30,9 +31,9 @@ export class ConsumsService {
   private static initializeResumLines(tipusConsums: TipusConsum[]) {
     const result: ResumLine[] = [];
     DateService.generateMonthText().forEach(month => {
-      const line = ({ month, totals: new Map() });
+      const line = new ResumLine(month);
       tipusConsums.forEach(tipusConsum => {
-        line.totals.set(tipusConsum.id, 0);
+        line.totals.set(tipusConsum.id, new ResumValue());
       });
       result.push(line);
     });
@@ -48,13 +49,13 @@ export class ConsumsService {
       [...resum.lines].splice(0, currentMonth).forEach((line) => {
         const total = line.totals.get(type.id);
         const stat = stats.get(type.id) || new ResumStat();
-        stat.total += total;
-        stat.average += total;
+        stat.total += total.totalAmount;
+        stat.totalAverage += total.totalAmount;
         stats.set(type.id, stat);
       })
 
       const stat = stats.get(type.id);
-      stat.average = stat.average / currentMonth;
+      stat.totalAverage = stat.totalAverage / currentMonth;
 
     });
 

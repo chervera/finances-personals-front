@@ -12,13 +12,13 @@
         <div class="table__item" *ngFor="let line of resum.lines; index as i;">
             <span class="table__cell table__cell--featured">{{line.month}}</span>
             <span class="table__cell table__cell--centered"
-                [ngClass]="{'table__cell--void': total.value==0, 'table__cell--disabled': (i > 4)}"
-                *ngFor="let total of line.totals | keyvalue">{{total.value | currency: 'EUR'}}</span>
+                [ngClass]="{'table__cell--void': total.value.totalAmount==0, 'table__cell--disabled': (i > 4)}"
+                *ngFor="let total of line.totals | keyvalue">{{total.value.totalAmount | currency: 'EUR'}}</span>
         </div>
         <div class="table__footer">
             <span class="table__cell">Mitja</span>
             <span class="table__cell table__cell--centered"
-                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.average | currency: 'EUR'}}</span>
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.totalAverage | currency: 'EUR'}}</span>
         </div>
         <div class="table__footer">
             <span class="table__cell">Total</span>
