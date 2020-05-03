@@ -36,6 +36,7 @@ export class FormAlimentacioComponent implements OnInit, OnChanges {
       import: ['', Validators.required],
       tipusAlimentacioId: ['', Validators.required],
       data: ['', Validators.required],
+      concepte: ['']
     });
   }
 

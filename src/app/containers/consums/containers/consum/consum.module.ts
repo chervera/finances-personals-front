@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormConsumComponent } from './components/form-consum/form-consum.component';
 import { ConsumContainer } from './consum.container';
 import { ConsumRoutingModule } from './consum-routing.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -14,7 +16,9 @@ import { ConsumRoutingModule } from './consum-routing.module';
     CommonModule,
     ConsumRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class ConsumModule { }

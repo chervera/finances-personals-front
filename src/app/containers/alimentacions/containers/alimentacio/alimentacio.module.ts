@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormAlimentacioComponent } from './components/form-alimentacio/form-alimentacio.component';
 import { AlimentacioContainer } from './alimentacio.container';
 import { AlimentacioRoutingModule } from './alimentacio-routing.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -14,7 +16,9 @@ import { AlimentacioRoutingModule } from './alimentacio-routing.module';
     CommonModule,
     AlimentacioRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class AlimentacioModule { }

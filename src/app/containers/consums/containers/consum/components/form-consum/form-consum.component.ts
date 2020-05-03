@@ -36,6 +36,7 @@ export class FormConsumComponent implements OnInit, OnChanges {
       import: ['', Validators.required],
       tipusConsumId: ['', Validators.required],
       data: ['', Validators.required],
+      concepte: [''],
     });
   }
 

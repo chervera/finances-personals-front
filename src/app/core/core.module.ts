@@ -10,6 +10,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { AuthErrorInterceptorService } from './interceptors/auth-error-interceptor.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -35,6 +36,7 @@ import { AuthErrorInterceptorService } from './interceptors/auth-error-intercept
       useClass: AuthErrorInterceptorService,
       multi: true
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
   ],
 })
 

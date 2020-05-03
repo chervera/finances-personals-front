@@ -17,7 +17,7 @@ $color-3: #a7e4ff;
 $color-4: #fdc2e1;
 $color-5: #fcdfc7;
 $color-success: #bafec9;
-
+$color-disabled: #ddd;
 $color-error: #db2516;
 
 @mixin background-gradient {
@@ -327,8 +327,15 @@ body {
     .table__cell {
         padding: $distance-m;
     }
+}
 
-    .link {
+.table__footer {
+    background: #dbe7f4;
+    width: 100%;
+    display: table-row;
+
+    .table__cell {
+        background: none;
     }
 }
 
@@ -350,6 +357,10 @@ body {
     &--featured {
         background: $color-4;
     }
+
+    &--void {
+        background: $color-secundary-light;
+    }
     &--primary {
         background: $color-3;
     }
@@ -362,6 +373,9 @@ body {
     &--error {
         background: $color-error;
         color: #fff;
+    }
+    &--disabled {
+        background-color: $color-disabled;
     }
     &--ghost {
         &::after {
@@ -391,6 +405,7 @@ body {
 .input-group {
     margin-bottom: $distance-m;
     padding: 0 $distance-m;
+    position: relative;
     label {
         display: block;
         margin-left: $distance-m;
@@ -431,6 +446,10 @@ body {
             border-color: $color-main;
             outline: none;
         }
+    }
+    .mat-datepicker-toggle {
+        position: absolute;
+        right: $distance-m;
     }
 }
 

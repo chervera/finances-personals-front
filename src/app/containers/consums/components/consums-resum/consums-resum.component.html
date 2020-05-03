@@ -2,16 +2,28 @@
     <div class="table">
         <div class="table__header">
             <span class="table__cell">Mes</span>
-            <span class="table__cell" *ngFor="let tipus of resum.types">{{tipus.descripcio}}</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let tipus of resum.types">{{tipus.descripcio}}</span>
         </div>
         <div class="table__item" *ngIf="!resum">
             <span class="table__cell table__cell--ghost"></span>
             <span class="table__cell table__cell--ghost" *ngFor="let tipus of resum.types"></span>
         </div>
-        <div class="table__item" *ngFor="let line of resum.lines">
-            <span class="table__cell">{{line.month}}</span>
-            <span class="table__cell"
+        <div class="table__item" *ngFor="let line of resum.lines; index as i;">
+            <span class="table__cell table__cell--featured">{{line.month}}</span>
+            <span class="table__cell table__cell--centered"
+                [ngClass]="{'table__cell--void': total.value==0, 'table__cell--disabled': (i > 4)}"
                 *ngFor="let total of line.totals | keyvalue">{{total.value | currency: 'EUR'}}</span>
+        </div>
+        <div class="table__footer">
+            <span class="table__cell">Mitja</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.average | currency: 'EUR'}}</span>
+        </div>
+        <div class="table__footer">
+            <span class="table__cell">Total</span>
+            <span class="table__cell table__cell--centered"
+                *ngFor="let stat of resum.stats | keyvalue">{{stat.value.total | currency: 'EUR'}}</span>
         </div>
     </div>
 </div>

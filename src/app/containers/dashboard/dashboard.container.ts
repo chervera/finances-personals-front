@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, shareReplay } from 'rxjs/operators';
 import { Resum, ResumService } from 'src/app/core/services/resum.service';
-import { zip, Observable } from 'rxjs';
+import { zip, Observable, combineLatest } from 'rxjs';
 import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
 import { Ingres } from 'src/app/core/model/ingres.model';
 import { Alimentacio } from 'src/app/core/model/alimentacio.model';
@@ -28,13 +28,14 @@ export class DashboardContainer implements OnInit {
   consums$: Observable<Consum[]> = this.store.select(CoreSelectors.selectConsums).pipe(filter(data => data != null));
   filter$: Observable<Filter> = this.store.select(CoreSelectors.selectMainFilter);
 
-  resums$: Observable<Resum[]> = zip(
+  resums$: Observable<Resum[]> = combineLatest(
     this.despesesFixes$,
     this.ingressos$,
     this.consums$,
     this.alimentacions$
   ).pipe(
-    map(([despesesFixes, ingressos, consums, alimentacions]: [DespesaFixa[], Ingres[], Consum[], Alimentacio[]]) => ResumService.generateResum(ingressos, despesesFixes, consums, alimentacions))
+    map(([despesesFixes, ingressos, consums, alimentacions]: [DespesaFixa[], Ingres[], Consum[], Alimentacio[]]) => ResumService.generateResum(ingressos, despesesFixes, consums, alimentacions)),
+    shareReplay()
   );
 
   constructor(

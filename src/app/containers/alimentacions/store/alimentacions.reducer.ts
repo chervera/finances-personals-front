@@ -17,7 +17,7 @@ const _reducer = createReducer(initialState,
         ({ ...state, alimentacio: action.payload })
     ),
     on(Actions.createAlimentacio, (state, action) =>
-        ({ ...state, alimentacio: {} })
+        ({ ...state, alimentacio: { data: new Date() } })
     )
 );
 

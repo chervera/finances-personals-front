@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectToken } from '../store/core.selectors';
 import { AuthService } from 'src/app/containers/auth/services/auth.service';
 import { Router } from '@angular/router';
+import { setToken } from '../store/core.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,11 @@ export class AuthInterceptorService implements HttpInterceptor {
     this.store.select(selectToken).subscribe(tk => token = tk);
     let request = req;
 
-    if (this.auth.isTokenExpired()) {
+    if (token && this.auth.isTokenExpired()) {
+      this.auth.deleteToken();
+      this.store.dispatch(setToken(null));
       this.router.navigate(['/auth/login']);
+      return EMPTY;
     }
 
     if (token) {

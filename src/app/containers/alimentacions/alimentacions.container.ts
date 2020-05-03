@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
 import { Store } from '@ngrx/store';
-import { Observable, zip } from 'rxjs';
+import { Observable, zip, combineLatest } from 'rxjs';
 import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { ActionTypes } from './store/alimentacions.actions';
@@ -10,7 +10,7 @@ import { Filter } from 'src/app/shared/filter/filter.model';
 import { FilterComponent } from 'src/app/shared/filter/filter.component';
 import { Alimentacio } from 'src/app/core/model/alimentacio.model';
 import { requestDeleteAlimentacio } from './store/alimentacions.actions';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, shareReplay } from 'rxjs/operators';
 import { TipusAlimentacio } from 'src/app/core/model/tipus-alimentacio.model';
 import { Resum } from 'src/app/core/model/resum.model';
 import { AlimentacionsService } from './services/alimentacions.service';
@@ -27,11 +27,12 @@ export class AlimentacionsContainer implements OnInit {
 
   alimentacions$: Observable<Alimentacio[]> = this.store.select(CoreSelectors.selectAlimentacions);
   tipusAlimentacions$: Observable<TipusAlimentacio[]> = this.store.select(CoreSelectors.selectTipusAlimentacions);
-  resum$: Observable<Resum<TipusAlimentacio>> = zip(
+  resum$: Observable<Resum<TipusAlimentacio>> = combineLatest(
     this.alimentacions$,
     this.tipusAlimentacions$
   ).pipe(
-    map(([alimentacions, tipusAlimentacions]) => AlimentacionsService.generateResumLines(alimentacions, tipusAlimentacions))
+    map(([alimentacions, tipusAlimentacions]) => AlimentacionsService.generateResumLines(alimentacions, tipusAlimentacions)),
+    shareReplay()
   );
   filter$: Observable<Filter> = this.store.select(CoreSelectors.selectMainFilter);
 

@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from './core/store/core.reducer';
 import { initiateTokenFromStorage } from './core/store/core.actions';
 import { AuthService } from './containers/auth/services/auth.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 registerLocaleData(localeEs, 'es-ES');
 
@@ -20,7 +21,8 @@ registerLocaleData(localeEs, 'es-ES');
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    NoopAnimationsModule
   ],
   providers: [
     {

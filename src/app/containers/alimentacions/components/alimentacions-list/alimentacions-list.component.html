@@ -2,7 +2,7 @@
     <div class="table">
         <div class="table__header">
             <span class="table__cell">Concepte</span>
-            <span class="table__cell">Import</span>
+            <span class="table__cell table__cell--centered">Import</span>
             <span class="table__cell">Data</span>
             <span class="table__cell">Tipus</span>
             <span class="table__cell table__cell--end">Accions</span>
@@ -15,8 +15,8 @@
             <span class="table__cell table__cell--ghost"></span>
         </div>
         <div class="table__item" *ngFor="let item of alimentacions">
-            <span class="table__cell">{{item.concepte}}</span>
-            <span class="table__cell">{{item.import | currency: 'EUR'}}</span>
+            <span class="table__cell table__cell--featured">{{item.concepte}}</span>
+            <span class="table__cell table__cell--centered">{{item.import | currency: 'EUR'}}</span>
             <span class="table__cell">{{item.data | date: 'dd-MM-yyyy'}}</span>
             <span class="table__cell">{{item.tipusAlimentacio?.descripcio}}</span>
             <div class="table__cell table__cell--end">

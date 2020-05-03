@@ -5,15 +5,21 @@
             <input id="import" type="text" formControlName="import" required />
         </div>
         <div class="input-group">
-            <label for="import">Data</label>
-            <input id="data" type="text" formControlName="data" required />
-        </div>
-        <div class="input-group">
             <label for="year">Tipus</label>
             <select formControlName="tipusConsumId" required>
                 <option *ngFor="let tipusConsum of tipusConsums" value="{{tipusConsum.id}}">
                     {{tipusConsum.descripcio}}</option>
             </select>
+        </div>
+        <div class="input-group">
+            <label for="import">Data</label>
+            <input id="data" type="text" formControlName="data" required [matDatepicker]="datepicker" />
+            <mat-datepicker-toggle [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+        </div>
+        <div class="input-group">
+            <label for="concepte">Concepte</label>
+            <input id="concepte" type="text" formControlName="concepte" />
         </div>
     </div>
 </form>
