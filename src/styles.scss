@@ -270,6 +270,10 @@ body {
 
 .panel {
     background: #fff;
+
+    &--big {
+        flex-grow: 2;
+    }
 }
 
 .panel + .panel {
@@ -294,6 +298,7 @@ body {
 .panel__content {
     padding: $distance-m;
 }
+
 .panel__footer {
     display: flex;
     padding: $distance-m;
@@ -371,7 +376,7 @@ body {
     &--success {
         background: $color-success;
     }
-    &--error {
+    &.table__cell--error {
         background: $color-error;
         color: #fff;
     }
@@ -478,5 +483,12 @@ body {
     .input-group {
         flex: 1 1 20%;
         max-width: 20%;
+    }
+
+    .panel__container {
+        display: flex;
+        & > .panel + .panel {
+            margin-top: 0;
+        }
     }
 }

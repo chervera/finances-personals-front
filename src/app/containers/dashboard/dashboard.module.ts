@@ -8,10 +8,11 @@ import { ResumComponent } from './components/resum/resum.component';
 import { ResumDespesesIngresosAreaComponent } from './components/resum-despeses-ingresos-area/resum-despeses-ingresos-area.component';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { ResumDespesesLineComponent } from './components/resum-despeses-line/resum-despeses-line.component';
+import { ResumAnualComponent } from './components/resum-anual/resum-anual.component';
 
 
 @NgModule({
-  declarations: [DashboardContainer, ResumComponent, ResumDespesesIngresosAreaComponent, ResumDespesesLineComponent],
+  declarations: [DashboardContainer, ResumComponent, ResumDespesesIngresosAreaComponent, ResumDespesesLineComponent, ResumAnualComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

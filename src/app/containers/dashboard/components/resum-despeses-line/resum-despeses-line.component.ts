@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { Chart } from 'src/app/core/components/chart';
-import { Resum } from 'src/app/core/services/resum.service';
+import { Resum, ResumAnual } from 'src/app/core/services/resum.service';
 import { DateService } from 'src/app/core/services/date.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DateService } from 'src/app/core/services/date.service';
 })
 export class ResumDespesesLineComponent extends Chart implements OnInit {
 
-  @Input() resums: Resum[];
+  @Input() resum: ResumAnual;
 
   readonly Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options;
@@ -24,8 +24,8 @@ export class ResumDespesesLineComponent extends Chart implements OnInit {
   }
 
   ngOnChanges() {
-    if (this.resums) {
-      this.constructChart(this.resums);
+    if (this.resum) {
+      this.constructChart(this.resum.resumsMensuals);
     }
   }
 

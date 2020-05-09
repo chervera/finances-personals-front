@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormIngresComponent } from './components/form-ingres/form-ingres.component';
 import { IngresContainer } from './ingres.container';
 import { IngresRoutingModule } from './ingres-routing.module';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -14,7 +16,9 @@ import { IngresRoutingModule } from './ingres-routing.module';
     CommonModule,
     IngresRoutingModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class IngresModule { }

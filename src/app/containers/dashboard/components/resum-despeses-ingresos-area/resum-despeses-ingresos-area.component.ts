@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Resum } from 'src/app/core/services/resum.service';
+import { Resum, ResumAnual } from 'src/app/core/services/resum.service';
 import * as Highcharts from 'highcharts';
 import { DateService } from 'src/app/core/services/date.service';
 import { Chart } from 'src/app/core/components/chart';
@@ -11,7 +11,7 @@ import { Chart } from 'src/app/core/components/chart';
 })
 export class ResumDespesesIngresosAreaComponent extends Chart implements OnInit {
 
-  @Input() resums: Resum[];
+  @Input() resum: ResumAnual;
 
   readonly Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options;
@@ -24,8 +24,8 @@ export class ResumDespesesIngresosAreaComponent extends Chart implements OnInit 
   }
 
   ngOnChanges() {
-    if (this.resums) {
-      this.constructChart(this.resums);
+    if (this.resum) {
+      this.constructChart(this.resum.resumsMensuals);
     }
   }
 
@@ -47,16 +47,18 @@ export class ResumDespesesIngresosAreaComponent extends Chart implements OnInit 
         }
       },
       series: [{
-        data: this.generateDespesesFromResums(resums),
-        type: 'area',
-        name: 'Despeses',
-        color: this.COLOR_DESPESA
-      }, {
         data: this.generateIngressosFromResums(resums),
         type: 'area',
         name: 'Ingressos',
         color: this.COLOR_INGRES
-      }],
+      },
+      {
+        data: this.generateDespesesFromResums(resums),
+        type: 'area',
+        name: 'Despeses',
+        color: this.COLOR_DESPESA
+      }
+      ],
       tooltip: {
         pointFormatter: function () {
           return this.y.toFixed(2) + '€';

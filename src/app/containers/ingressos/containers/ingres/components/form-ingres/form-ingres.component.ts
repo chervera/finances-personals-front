@@ -31,7 +31,7 @@ export class FormIngresComponent implements OnInit, OnChanges {
   createForm(): FormGroup {
     return this.fb.group({
       id: [null],
-      concepte: ['', Validators.required],
+      concepte: [''],
       import: ['', Validators.required],
       data: ['', Validators.required],
     });

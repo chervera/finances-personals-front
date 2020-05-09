@@ -14,19 +14,32 @@
         </div>
     </div>
     <div class="panel">
-        <div class="panel__header">
-            <span class="panel__title">Resum anual</span>
-        </div>
-        <div class="panel__content">
-            <app-resum [resums]="resums$ | async"></app-resum>
+        <div class="panel__container">
+            <div class="panel panel--big">
+                <div class="panel__header">
+                    <span class="panel__title">Resum mensual</span>
+                </div>
+                <div class="panel__content">
+                    <app-resum [resum]="resum$ | async"></app-resum>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel__header">
+                    <span class="panel__title">Resum anual</span>
+                </div>
+                <div class="panel__content">
+                    <app-resum-anual [resum]="resum$ | async"></app-resum-anual>
+                </div>
+            </div>
         </div>
     </div>
+
     <div class="panel">
         <div class="panel__header">
             <span class="panel__title">Despeses i ingressos</span>
         </div>
         <div class="panel__content">
-            <app-resum-despeses-ingresos-area [resums]="resums$ | async"></app-resum-despeses-ingresos-area>
+            <app-resum-despeses-ingresos-area [resum]="resum$ | async"></app-resum-despeses-ingresos-area>
         </div>
     </div>
     <div class="panel">
@@ -34,7 +47,7 @@
             <span class="panel__title">Despeses fixes, consums i alimentació</span>
         </div>
         <div class="panel__content">
-            <app-resum-despeses-line [resums]="resums$ | async"></app-resum-despeses-line>
+            <app-resum-despeses-line [resum]="resum$ | async"></app-resum-despeses-line>
         </div>
     </div>
 </div>

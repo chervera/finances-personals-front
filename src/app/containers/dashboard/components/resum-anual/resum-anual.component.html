@@ -1,0 +1,45 @@
+<div class="table__wrapper">
+    <div class="table">
+        <div class="table__header">
+            <span class="table__cell">&nbsp;</span>
+            <span class="table__cell table__cell--centered">Resultat actual</span>
+            <span class="table__cell table__cell--centered">Resultat Previst</span>
+        </div>
+        <div class="table__item">
+            <span class="table__cell table__cell--featured">
+                Despesa Anual
+            </span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--ghost" *ngIf="!resum"></span>
+                {{resum.totalDespeses | currency: 'EUR'}}
+            </span>
+            <span class="table__cell">
+                {{resum.previsioDespeses | currency: 'EUR'}}
+            </span>
+        </div>
+        <div class="table__item">
+            <span class="table__cell table__cell--featured">
+                Ingressos Anuals
+            </span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--ghost" *ngIf="!resum"></span>
+                {{resum.totalIngressos | currency: 'EUR'}}
+            </span>
+            <span class="table__cell">
+                {{resum.previsioIngressos | currency: 'EUR'}}
+            </span>
+        </div>
+        <div class="table__item">
+            <span class="table__cell table__cell--featured">
+                Total Anual
+            </span>
+            <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--ghost" *ngIf="!resum"></span>
+                {{resum.total | currency: 'EUR'}}
+            </span>
+            <span class="table__cell">
+                {{resum.previsioTotal | currency: 'EUR'}}
+            </span>
+        </div>
+    </div>
+</div>

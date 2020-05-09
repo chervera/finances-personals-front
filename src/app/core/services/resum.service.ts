@@ -12,17 +12,17 @@ export class ResumService {
 
   constructor() { }
 
-  static generateResum(ingressos: Ingres[], despesesFixes: DespesaFixa[], consums: Consum[], alimentacio: Alimentacio[]): Resum[] {
-    const resum: Resum[] = [];
+  static generateResum(ingressos: Ingres[], despesesFixes: DespesaFixa[], consums: Consum[], alimentacio: Alimentacio[]): ResumAnual {
+    const resum = new ResumAnual();
     const months = DateService.generateMonthNumbers();
     const monthsText = DateService.generateMonthText();
     for (let i = 0; i < months.length; i++) {
-      resum[i] = new Resum();
-      resum[i].descriptionMonth = monthsText[i];
-      resum[i].despesesFixes = this.generateDespesesFixesByMonth(despesesFixes, i);
-      resum[i].ingressos = this.generateIngressosByMonth(ingressos, i);
-      resum[i].consums = this.generateConsumsByMonth(consums, i);
-      resum[i].alimentacio = this.generateAlimentacionsByMonth(alimentacio, i);
+      resum.resumsMensuals[i] = new Resum();
+      resum.resumsMensuals[i].descriptionMonth = monthsText[i];
+      resum.resumsMensuals[i].despesesFixes = this.generateDespesesFixesByMonth(despesesFixes, i);
+      resum.resumsMensuals[i].ingressos = this.generateIngressosByMonth(ingressos, i);
+      resum.resumsMensuals[i].consums = this.generateConsumsByMonth(consums, i);
+      resum.resumsMensuals[i].alimentacio = this.generateAlimentacionsByMonth(alimentacio, i);
     }
     return resum;
   }
@@ -69,8 +69,88 @@ export class ResumService {
   }
 }
 
-export interface ResumAnual {
-  resumsMensuals: Resum;
+export class ResumAnual {
+  resumsMensuals: Resum[];
+
+  constructor() {
+    this.resumsMensuals = [];
+  }
+
+  get totalDespesesFixes() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.despesesFixes, 0);
+  }
+
+  get totalConsums() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.consums, 0);
+  }
+
+  get totalAlimentacions() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.alimentacio, 0);
+  }
+
+  get totalDespeses() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.despesesTotals, 0);
+  }
+
+  get totalIngressos() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.ingressos, 0);
+  }
+
+  get totalTotals() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.total, 0);
+  }
+
+  get previsioDespeses() {
+    const totalConsumsPevistos = this.mitjaConsumsMesActual * 12;
+    const totalAlimentacionsPrevistes = this.mitjaAlimentacionsMesActual * 12;
+    return this.totalDespesesFixes + totalConsumsPevistos + totalAlimentacionsPrevistes;
+  }
+
+  get previsioIngressos() {
+    return this.mitjaIngressosMesActual * 12;
+  }
+
+  get previsioTotal() {
+    return this.previsioIngressos - this.previsioDespeses;
+  }
+
+  get total() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.total, 0);
+  }
+
+  get mitjaDespesesFixesMesActual() {
+    const currentMonth = new Date().getMonth() + 1;
+    return this.resumsMensuals.slice(0, currentMonth).reduce((total, resum) => total + resum.despesesFixes, 0) / currentMonth;
+  }
+
+  get mitjaDespesesFixes() {
+    return this.resumsMensuals.reduce((total, resum) => total + resum.despesesFixes, 0) / 12;
+  }
+
+  get mitjaConsumsMesActual() {
+    const currentMonth = new Date().getMonth() + 1;
+    return this.resumsMensuals.slice(0, currentMonth).reduce((total, resum) => total + resum.consums, 0) / currentMonth;
+  }
+
+  get mitjaAlimentacionsMesActual() {
+    const currentMonth = new Date().getMonth() + 1;
+    return this.resumsMensuals.slice(0, currentMonth).reduce((total, resum) => total + resum.alimentacio, 0) / currentMonth;
+  }
+
+  get mitjaIngressosMesActual() {
+    const currentMonth = new Date().getMonth() + 1;
+    return this.resumsMensuals.slice(0, currentMonth).reduce((total, resum) => total + resum.ingressos, 0) / currentMonth;
+  }
+
+  get totalDespesesMesActual() {
+    const currentMonth = new Date().getMonth() + 1;
+    return this.resumsMensuals.slice(0, currentMonth).reduce((total, resum) => total + resum.despesesTotals, 0) / currentMonth;
+  }
+
+  get totalTotalsMesActual() {
+    const currentMonth = new Date().getMonth() + 1;
+    return this.resumsMensuals.slice(0, currentMonth).reduce((total, resum) => total + resum.total, 0) / currentMonth;
+  }
 }
 
 export class Resum {
@@ -86,7 +166,7 @@ export class Resum {
   }
 
   get total(): number {
-    return this.ingressos - this.despesesFixes;
+    return this.ingressos - this.despesesTotals;
   }
 }
 

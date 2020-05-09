@@ -2,7 +2,7 @@
     <div class="form">
         <div class="input-group">
             <label for="concepte">Concepte</label>
-            <input type="text" id="concepte" formControlName="concepte" required />
+            <input type="text" id="concepte" formControlName="concepte" />
         </div>
         <div class="input-group">
             <label for="import">Import</label>
@@ -10,7 +10,9 @@
         </div>
         <div class="input-group">
             <label for="import">Data</label>
-            <input id="data" type="text" formControlName="data" required />
+            <input id="data" type="text" formControlName="data" required [matDatepicker]="datepicker" />
+            <mat-datepicker-toggle [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
         </div>
     </div>
 </form>
