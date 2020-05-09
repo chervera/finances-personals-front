@@ -27,7 +27,7 @@ export class AlimentacionsService {
 
   private static initializeResumLines(tipusAlimentacions: TipusAlimentacio[]) {
     const result: ResumLine[] = [];
-    DateService.generateMonthText().forEach(month => {
+    DateService.generateMonthText(new Date().getMonth() + 1).forEach(month => {
       const line = new ResumLine(month);
       tipusAlimentacions.forEach(tipusAlimentacio => {
         line.totals.set(tipusAlimentacio.id, new ResumValue());

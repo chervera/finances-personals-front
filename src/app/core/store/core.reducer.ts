@@ -34,8 +34,8 @@ export interface AuthState {
 }
 
 export interface MastersState {
-    tipusAlimentacions?: TipusAlimentacio[];
-    tipusConsums?: TipusConsum[];
+    tipusAlimentacions: TipusAlimentacio[];
+    tipusConsums: TipusConsum[];
 }
 
 export const initialState = {
@@ -45,8 +45,11 @@ export const initialState = {
     mainFilter: {
         year: new Date().getFullYear(),
     },
-    masters: {},
-    auth: {}
+    masters: {
+        tipusAlimentacions: [],
+        tipusConsums: []
+    },
+    auth: {},
 };
 
 const _coreReducer = createReducer(initialState,
@@ -77,7 +80,7 @@ const _coreReducer = createReducer(initialState,
     on(CoreActions.setToken, (state, action) =>
         ({ ...state, auth: { ...state.auth, token: action.payload } })
     ),
-    on(CoreActions.setUser, (state, action) =>
+    on(CoreActions.setProfile, (state, action) =>
         ({ ...state, auth: { ...state.auth, user: action.payload } })
     ),
     on(CoreActions.clearState, (state, action) =>

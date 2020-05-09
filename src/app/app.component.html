@@ -19,6 +19,12 @@
       <li>
         <a routerLink="/ingressos" routerLinkActive="active" class="nav__menu__link">Ingressos</a>
       </li>
+      <li>
+        <a routerLink="/perfil" routerLinkActive="active" class="nav__menu__link">El meu perfil</a>
+      </li>
+      <li>
+        <a (click)="logout()" class="nav__menu__link">Logout</a>
+      </li>
     </ul>
   </nav>
   <div class="page-wrapper">
@@ -28,7 +34,7 @@
         <i class="menu_button__icon"></i>
       </button>
       <span class="header__title">Finances personals</span>
-      <span class="header__user" *ngIf="(user$ | async) as user">Carles Hervera</span>
+      <span class="header__user" *ngIf="(user$ | async) as user">{{user.name}} {{user.surname}}</span>
     </header>
     <router-outlet></router-outlet>
   </div>

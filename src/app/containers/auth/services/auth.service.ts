@@ -41,4 +41,8 @@ export class AuthService {
     if (date === undefined) return false;
     return !(date.valueOf() > new Date().valueOf());
   }
+
+  logout() {
+    this.deleteToken();
+  }
 }

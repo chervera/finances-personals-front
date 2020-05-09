@@ -17,13 +17,6 @@
         </div>
     </div>
     <div class="panel">
-        <div class="panel__content">
-            <app-despeses-fixes-list [despesesFixes]="despesesFixes$ | async" (edit)="onEdit($event)"
-                (delete)="onDelete($event)">
-            </app-despeses-fixes-list>
-        </div>
-    </div>
-    <div class="panel">
         <div class="panel__header">
             <div class="panel__title">Evolució de les meves despeses fixes</div>
         </div>
@@ -31,5 +24,11 @@
             <app-despeses-fixes-line-chart [despesesFixes]="despesesFixes$ | async"></app-despeses-fixes-line-chart>
         </div>
     </div>
-
+    <div class="panel">
+        <div class="panel__content">
+            <app-despeses-fixes-list [despesesFixes]="despesesFixes$ | async" (edit)="onEdit($event)"
+                (delete)="onDelete($event)">
+            </app-despeses-fixes-list>
+        </div>
+    </div>
 </div>

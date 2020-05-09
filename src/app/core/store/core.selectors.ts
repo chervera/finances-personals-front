@@ -42,8 +42,7 @@ export const selectTipusConsums = createSelector(
 
 export const selectConsums = createSelector(
     selectCore,
-    (state: CoreState) => state.consums
-        .filter(consums => !!consums)
+    (state: CoreState) => (state.consums || [])?.filter(consums => !!consums)
         .map((consum) => ({ ...consum, tipusConsum: state.masters.tipusConsums.find((tipusConsum) => tipusConsum.id == consum.tipusConsumId) }))
 )
 
@@ -54,8 +53,7 @@ export const selectTipusAlimentacions = createSelector(
 
 export const selectAlimentacions = createSelector(
     selectCore,
-    (state: CoreState) => state.alimentacions
-        .filter(alimentacions => !!alimentacions)
+    (state: CoreState) => (state.alimentacions || [])?.filter(alimentacions => !!alimentacions)
         .map((alimentacio) => ({ ...alimentacio, tipusAlimentacio: state.masters.tipusAlimentacions.find((tipusAlimentacio) => tipusAlimentacio.id == alimentacio.tipusAlimentacioId) }))
 )
 

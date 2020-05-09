@@ -10,10 +10,17 @@ const routes: Routes = [
   },
   {
     path: 'ingressos',
+    canLoad: [AuthGuardService],
     loadChildren: () => import('./containers/ingressos/ingressos.module').then(m => m.IngressosModule)
   },
   {
+    path: 'perfil',
+    canLoad: [AuthGuardService],
+    loadChildren: () => import('./containers/profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
     path: 'despeses-fixes',
+    canLoad: [AuthGuardService],
     loadChildren: () => import('./containers/despeses-fixes/despeses-fixes.module').then(m => m.DespesesFixesModule)
   },
   {

@@ -30,7 +30,7 @@ export class ConsumsService {
 
   private static initializeResumLines(tipusConsums: TipusConsum[]) {
     const result: ResumLine[] = [];
-    DateService.generateMonthText().forEach(month => {
+    DateService.generateMonthText(new Date().getMonth() + 1).forEach(month => {
       const line = new ResumLine(month);
       tipusConsums.forEach(tipusConsum => {
         line.totals.set(tipusConsum.id, new ResumValue());

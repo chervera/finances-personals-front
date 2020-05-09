@@ -26,8 +26,12 @@ export enum ActionTypes {
     SET_TIPUS_CONSUM = `[CORE] Set tipus consum`,
     REQUEST_LOGIN = `[CORE] Request login`,
     LOGIN_SUCCESS = `[CORE] Login success`,
-    SET_USER = `[CORE] Set user`,
+    REQUEST_PROFILE = `[CORE] Request profile`,
+    REQUEST_UPDATE_PROFILE = `[CORE] Request update profile`,
+    UPDATE_PROFILE_SUCCESS = `[CORE] Profile update success`,
+    SET_PROFILE = `[CORE] Set profile`,
     SET_TOKEN = `[CORE] Set token`,
+    REQUEST_LOGOUT = `[CORE] Request logout`,
     INITIATE_TOKEN_FROM_STORAGE = `[CORE] Initiate token from storage`,
     CLEAR_STATE = `[CORE] Clear state`
 }
@@ -48,8 +52,12 @@ export const setTipusAlimentacio = createAction(ActionTypes.SET_TIPUS_ALIMENTACI
 export const requestTipusConsum = createAction(ActionTypes.REQUEST_TIPUS_CONSUM);
 export const setTipusConsum = createAction(ActionTypes.SET_TIPUS_CONSUM, props<{ payload: TipusConsum[] }>());
 export const requestLogin = createAction(ActionTypes.REQUEST_LOGIN, props<{ payload: { username: string, password: string } }>());
-export const setUser = createAction(ActionTypes.SET_USER, props<{ payload: User }>());
+export const requestProfile = createAction(ActionTypes.REQUEST_PROFILE);
+export const requestUpdateProfile = createAction(ActionTypes.REQUEST_UPDATE_PROFILE, props<{ payload: User }>());
+export const updateProfileSucces = createAction(ActionTypes.UPDATE_PROFILE_SUCCESS);
+export const setProfile = createAction(ActionTypes.SET_PROFILE, props<{ payload: User }>());
 export const setToken = createAction(ActionTypes.SET_TOKEN, props<{ payload: string[] }>());
+export const requestLogout = createAction(ActionTypes.REQUEST_LOGOUT);
 export const loginSuccess = createAction(ActionTypes.LOGIN_SUCCESS);
 export const initiateTokenFromStorage = createAction(ActionTypes.INITIATE_TOKEN_FROM_STORAGE);
 export const clearState = createAction(ActionTypes.CLEAR_STATE);

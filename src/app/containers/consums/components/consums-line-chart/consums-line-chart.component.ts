@@ -25,7 +25,7 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes) {
+  ngOnChanges() {
     if (this.resum) {
       this.constructChart(this.resum);
     }
@@ -35,7 +35,7 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
     this.chartOptions = {
       title: null,
       xAxis: {
-        categories: DateService.generateMonthText()
+        categories: DateService.generateMonthText(new Date().getMonth() + 1)
       },
       yAxis: {
         min: 0,
@@ -50,6 +50,7 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
       },
       series: this.generateSeriesFromResum(resum)
     };
+    console.log(this.chartOptions);
   }
 
   private generateSeriesFromResum(resum: Resum<TipusConsum>) {
@@ -61,7 +62,7 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
         name: tipus.descripcio
       }
       resum.lines.forEach((line: ResumLine) => {
-        serie.data.push(line.totals.get(tipus.id));
+        serie.data.push(line.totals.get(tipus.id).totalAmount);
       });
       series.push(serie);
     });

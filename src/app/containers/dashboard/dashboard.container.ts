@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
-import { map, filter, shareReplay } from 'rxjs/operators';
+import { map, filter, shareReplay, tap } from 'rxjs/operators';
 import { Resum, ResumService } from 'src/app/core/services/resum.service';
 import { zip, Observable, combineLatest } from 'rxjs';
 import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
@@ -34,8 +34,7 @@ export class DashboardContainer implements OnInit {
     this.consums$,
     this.alimentacions$
   ).pipe(
-    map(([despesesFixes, ingressos, consums, alimentacions]: [DespesaFixa[], Ingres[], Consum[], Alimentacio[]]) => ResumService.generateResum(ingressos, despesesFixes, consums, alimentacions)),
-    shareReplay()
+    map(([despesesFixes, ingressos, consums, alimentacions]: [DespesaFixa[], Ingres[], Consum[], Alimentacio[]]) => ResumService.generateResum(ingressos, despesesFixes, consums, alimentacions))
   );
 
   constructor(

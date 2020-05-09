@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { requestDespesesFixes, toggleIsMenuShowed, requestIngressos, requestConsums, requestAlimentacions, requestMasters } from './core/store/core.actions';
+import { requestDespesesFixes, toggleIsMenuShowed, requestIngressos, requestConsums, requestAlimentacions, requestMasters, requestLogout } from './core/store/core.actions';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
 import { Observable } from 'rxjs';
 import { User } from './core/model/user.model';
 import { tap, filter, share, shareReplay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ export class AppComponent implements OnInit {
   user$: Observable<User> = this.store.select(CoreSelectors.selectUser);
 
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,11 @@ export class AppComponent implements OnInit {
 
   toggleMenu() {
     this.store.dispatch(toggleIsMenuShowed());
+  }
+
+  logout() {
+    this.store.dispatch(requestLogout());
+    this.router.navigate(['/auth/login']);
   }
 
 }

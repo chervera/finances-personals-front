@@ -1,0 +1,18 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">El meu perfil</span>
+    </div>
+    <div class="panel">
+        <div class="panel__content">
+            <app-form-profile [user]="user$ | async">
+            </app-form-profile>
+        </div>
+        <div class="panel__footer">
+            <div class="page__actions">
+                <button class="page__action button" (click)="save()"
+                    [disabled]="!formComponent?.form.valid">Guardar</button>
+                <a class="page__action button button--secondary" routerLink="/consums">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>

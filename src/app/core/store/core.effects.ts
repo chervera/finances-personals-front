@@ -13,6 +13,8 @@ import { MastersApiService } from '../api/master-api.service';
 import { AuthApiService } from 'src/app/containers/auth/api/auth-api.service';
 import { AlimentacionsApiService } from '../api/alimentacions-api.service';
 import { AuthService } from 'src/app/containers/auth/services/auth.service';
+import { ProfileApiService } from '../api/profile-api.service';
+import { User } from '../model/user.model';
 
 
 @Injectable()
@@ -26,6 +28,7 @@ export class CoreEffects {
         private alimentacionsApi: AlimentacionsApiService,
         private mastersApi: MastersApiService,
         private authApi: AuthApiService,
+        private profileApi: ProfileApiService,
         private auth: AuthService,
         private store: Store
     ) { }
@@ -102,6 +105,22 @@ export class CoreEffects {
             ))
     ));
 
+    requestProfile$ = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.REQUEST_PROFILE),
+        mergeMap(() => this.profileApi.findMyProfile()
+            .pipe(
+                map((user: User) => ({ type: ActionTypes.SET_PROFILE, payload: user })),
+                catchError(() => EMPTY)
+            ))
+    ));
+
+    requestLogout$ = createEffect(() => this.actions$.pipe(
+        ofType(ActionTypes.REQUEST_LOGOUT),
+        tap(() => this.auth.logout()),
+        map(() => ({ type: ActionTypes.CLEAR_STATE })),
+        catchError(() => EMPTY))
+    );
+
     initiateTokenFromStorage$ = createEffect(() => this.actions$.pipe(
         ofType(ActionTypes.INITIATE_TOKEN_FROM_STORAGE),
         tap(() => this.store.dispatch(CoreActions.loginSuccess())),
@@ -115,7 +134,8 @@ export class CoreEffects {
             CoreActions.requestIngressos(),
             CoreActions.requestConsums(),
             CoreActions.requestAlimentacions(),
-            CoreActions.requestMasters()
+            CoreActions.requestMasters(),
+            CoreActions.requestProfile()
         ]
         )
     ));
