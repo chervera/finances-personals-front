@@ -12,7 +12,7 @@ import { TipusConsum } from '../model/tipus-consum.model';
 })
 export class MastersApiService {
 
-  readonly BASE_PATH = '/api/v1/masters';
+  readonly BASE_PATH = 'https://finances-personals-api.herokuapp.com/api/v1/masters';
   readonly BASE_PATH_TIPUS_CONSUM = '/tipus-consums';
   readonly BASE_PATH_TIPUS_ALIMENTACIO = '/tipus-alimentacions';
 

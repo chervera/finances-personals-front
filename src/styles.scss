@@ -105,10 +105,9 @@ body {
 
 .nav {
     padding-top: $distance-m;
-    width: 94px;
+    flex: 0 0 85px;
     transition: all 500ms;
     overflow: hidden;
-    flex-basis: 1;
     .nav__menu__link {
         color: $font-color;
         text-decoration: none;
@@ -136,7 +135,7 @@ body {
     }
 
     &.opened {
-        width: 304px;
+        flex: 0 0 304px;
         transition: all 500ms;
         .nav__menu__link {
             color: $font-color;
@@ -150,7 +149,7 @@ body {
 }
 
 .page-wrapper {
-    width: 100%;
+    flex: 1 1;
 }
 
 .header {

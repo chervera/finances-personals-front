@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DespesesFixesApiService {
 
-  readonly BASE_PATH = "/api/v1/despeses-fixes";
+  readonly BASE_PATH = "https://finances-personals-api.herokuapp.com/api/v1/despeses-fixes";
 
   constructor(
     private http: HttpClient
