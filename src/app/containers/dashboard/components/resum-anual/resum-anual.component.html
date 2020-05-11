@@ -14,7 +14,7 @@
                 <span class="table__cell table__cell--featured">
                     Despesa Anual
                 </span>
-                <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--secondary-featured table__cell--centered">
                     <span class="table__cell table__cell--ghost" *ngIf="!resum"></span>
                     {{resum.totalDespeses | currency: 'EUR'}}
                 </span>
@@ -26,7 +26,7 @@
                 <span class="table__cell table__cell--featured">
                     Ingressos Anuals
                 </span>
-                <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--secondary-featured table__cell--centered">
                     <span class="table__cell table__cell--ghost" *ngIf="!resum"></span>
                     {{resum.totalIngressos | currency: 'EUR'}}
                 </span>
@@ -38,7 +38,7 @@
                 <span class="table__cell table__cell--featured">
                     Total Anual
                 </span>
-                <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--secondary-featured table__cell--centered">
                     <span class="table__cell table__cell--ghost" *ngIf="!resum"></span>
                     {{resum.total | currency: 'EUR'}}
                 </span>

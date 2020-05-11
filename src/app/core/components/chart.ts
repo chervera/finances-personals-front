@@ -5,4 +5,5 @@ export abstract class Chart {
     readonly COLOR_CONSUMS = '#fdc2e1';
     readonly COLOR_ALIMENTACIONS = '#fcdfc7';
     readonly SERIE_TYPE_LINE = 'line';
+    readonly SERIE_TYPE_PIE = 'pie';
 }

@@ -18,6 +18,7 @@ export class ResumService {
     const monthsText = DateService.generateMonthText();
     for (let i = 0; i < months.length; i++) {
       resum.resumsMensuals[i] = new Resum();
+      resum.resumsMensuals[i].numberMonth = i + 1;
       resum.resumsMensuals[i].descriptionMonth = monthsText[i];
       resum.resumsMensuals[i].despesesFixes = this.generateDespesesFixesByMonth(despesesFixes, i);
       resum.resumsMensuals[i].ingressos = this.generateIngressosByMonth(ingressos, i);

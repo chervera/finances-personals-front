@@ -27,7 +27,6 @@ export class AlimentacionsLineChartComponent extends Chart implements OnInit, On
 
   ngOnChanges(changes) {
     if (this.resum) {
-      console.log(this.resum);
       this.constructChart(this.resum);
     }
   }
@@ -75,16 +74,4 @@ export class AlimentacionsLineChartComponent extends Chart implements OnInit, On
     return series;
   }
 
-  /*private generateDataFromDespesesFixes(despesesFixes: DespesaFixa[]): number[] {
-    const initialMonths = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    return despesesFixes.reduce((months, despesaFixa: DespesaFixa) => {
-      const initMonth = despesaFixa.mesInici || 1;
-      const endMonth = despesaFixa.mesFi || 12;
-      for (let i = initMonth; i <= endMonth; i++) {
-        months[i - 1] = months[i - 1] + +despesaFixa.import;
-      }
-      return months;
-    }, initialMonths);
-  }
-*/
 }

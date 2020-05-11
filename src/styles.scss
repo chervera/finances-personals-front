@@ -16,6 +16,7 @@ $color-secundary-light: #f6f6f6;
 $color-3: #a7e4ff;
 $color-4: #fdc2e1;
 $color-5: #fcdfc7;
+$color-6: #fbcda8;
 $color-success: #bafec9;
 $color-disabled: #ddd;
 $color-error: #db2516;
@@ -352,11 +353,6 @@ body {
     }
 }
 
-.table__item {
-    display: table-row;
-    border-bottom: 1px solid #ececec;
-}
-
 .table__cell {
     display: table-cell;
     padding: $distance-s $distance-m;
@@ -380,6 +376,9 @@ body {
     &--secondary {
         background: $color-5;
     }
+    &--secondary-featured {
+        background: $color-6;
+    }
     &--success {
         background: $color-success;
     }
@@ -397,6 +396,22 @@ body {
             background: #585858;
             height: $font-size-m;
             @include animate-ghost-line;
+        }
+    }
+}
+
+.table__item {
+    display: table-row;
+    border-bottom: 1px solid #ececec;
+
+    &--featured {
+        border: 2px solid $color-main;
+        color: $font-color;
+    }
+    &--disabled {
+        .table__cell {
+            background: $color-secundary-light;
+            color: $font-color;
         }
     }
 }

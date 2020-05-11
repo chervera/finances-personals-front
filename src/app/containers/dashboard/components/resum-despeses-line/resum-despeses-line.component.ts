@@ -33,7 +33,7 @@ export class ResumDespesesLineComponent extends Chart implements OnInit {
     this.chartOptions = {
       title: null,
       xAxis: {
-        categories: DateService.generateMonthText()
+        categories: DateService.generateMonthText(new Date().getMonth())
       },
       yAxis: {
         min: 0,

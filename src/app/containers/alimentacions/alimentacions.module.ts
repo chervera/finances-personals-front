@@ -11,6 +11,7 @@ import { AlimentacionsListComponent } from './components/alimentacions-list/alim
 import { AlimentacionsEffects } from './store/alimentacions.effects';
 import { AlimentacionsResumComponent } from './components/alimentacions-resum/alimentacions-resum.component';
 import { AlimentacionsLineChartComponent } from './components/alimentacions-line-chart/alimentacions-line-chart.component';
+import { AlimentacionsTotalAvgPieChartComponent } from './components/alimentacions-total-avg-pie-chart/alimentacions-total-avg-pie-chart.component';
 
 
 
@@ -19,7 +20,8 @@ import { AlimentacionsLineChartComponent } from './components/alimentacions-line
     AlimentacionsContainer,
     AlimentacionsListComponent,
     AlimentacionsResumComponent,
-    AlimentacionsLineChartComponent
+    AlimentacionsLineChartComponent,
+    AlimentacionsTotalAvgPieChartComponent
   ],
   imports: [
     CommonModule,

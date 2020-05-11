@@ -19,7 +19,8 @@
             <span class="table__cell table__cell--ghost"></span>
         </div>
         <ng-container *ngIf="resum">
-            <div class="table__item" *ngFor="let resum of resum.resumsMensuals">
+            <div class="table__item" *ngFor="let resum of resum.resumsMensuals"
+                [ngClass]="{'table__item--featured': currentMonth == resum.numberMonth, 'table__item--disabled': resum.numberMonth > currentMonth}">
                 <span class="table__cell table__cell--featured">{{resum.descriptionMonth}}</span>
                 <span class="table__cell table__cell--secondary table__cell--centered">
                     {{resum.despesesFixes | currency: 'EUR'}}
@@ -30,7 +31,7 @@
                 <span class="table__cell table__cell--secondary table__cell--centered">
                     {{resum.alimentacio | currency: 'EUR'}}
                 </span>
-                <span class="table__cell table__cell--secondary table__cell--centered">
+                <span class="table__cell table__cell--secondary-featured table__cell--centered">
                     {{resum.despesesTotals | currency: 'EUR'}}
                 </span>
                 <span class="table__cell table__cell--primary table__cell--centered">

@@ -46,7 +46,7 @@ export class AlimentacionsService {
 
     resum.types.forEach((type) => {
       let totalItems = 0;
-      [...resum.lines].splice(0, currentMonth).forEach((line) => {
+      [...resum.lines].slice(0, currentMonth + 1).forEach((line) => {
         const total = line.totals.get(type.id);
         const stat = stats.get(type.id) || new ResumStat();
         stat.total += total.totalAmount;
