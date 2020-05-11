@@ -1,0 +1,18 @@
+<div class="table__wrapper">
+    <div class="table">
+        <div class="table__header">
+            <span class="table__cell">Descripció</span>
+            <span class="table__cell table__cell--end">Accions</span>
+        </div>
+        <div class="table__item" *ngIf="!tipusConsums">
+            <span class="table__cell table__cell--ghost"></span>
+            <span class="table__cell table__cell--ghost"></span>
+        </div>
+        <div class="table__item" *ngFor="let item of tipusConsums">
+            <span class="table__cell">{{item.descripcio}}</span>
+            <div class="table__cell table__cell--end">
+                <button (click)="onDelete(item.id)" class="link link--icon-delete link--error">borrar</button>
+            </div>
+        </div>
+    </div>
+</div>

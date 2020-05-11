@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+    <div class="form form--column">
+        <div class="input-group">
+            <label for="descripcio">Tipus de consums</label>
+            <input type="text" id="descripcio" formControlName="descripcio" />
+            <div class="input-group__append">
+                <button class="page__action button" (click)="onSave()">Afegir</button>
+            </div>
+        </div>
+    </div>
+</form>

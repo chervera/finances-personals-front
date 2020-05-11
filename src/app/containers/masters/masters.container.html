@@ -1,0 +1,31 @@
+<div class="page">
+    <div class="page__header">
+        <span class="page__title">Dades mestres</span>
+    </div>
+
+    <div class="panel">
+        <div class="panel__container">
+            <div class="panel">
+                <div class="panel__actions">
+                    <app-form-tipus-alimentacions (save)="saveTipusAlimentacio()"></app-form-tipus-alimentacions>
+                </div>
+                <div class="panel__content">
+                    <app-tipus-alimentacions-list [tipusAlimentacions]="tipusAlimentacions$ | async"
+                        (delete)="deleteTipusAlimentacio($event)">
+                    </app-tipus-alimentacions-list>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel__actions">
+                    <app-form-tipus-consums (save)="saveTipusConsum()"></app-form-tipus-consums>
+                </div>
+                <div class="panel__content">
+                    <app-tipus-consums-list [tipusConsums]="tipusConsums$ | async" (delete)="deleteTipusConsum($event)">
+                    </app-tipus-consums-list>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

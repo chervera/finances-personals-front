@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthApiService {
 
-  readonly BASE_PATH = 'https://finances-personals-api.herokuapp.com/api/v1/auth/';
+  readonly BASE_PATH = '/api/v1/auth/';
 
   constructor(
     private http: HttpClient

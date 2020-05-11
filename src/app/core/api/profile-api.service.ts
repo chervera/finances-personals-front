@@ -13,7 +13,7 @@ import { User } from '../model/user.model';
 })
 export class ProfileApiService {
 
-  readonly BASE_PATH = 'https://finances-personals-api.herokuapp.com/api/v1/perfil';
+  readonly BASE_PATH = '/api/v1/perfil';
 
   constructor(
     private http: HttpClient

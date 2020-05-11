@@ -117,6 +117,7 @@ body {
         color: transparent;
         white-space: nowrap;
         transition: all 500ms;
+        width: 100%;
 
         &:hover {
             background: $color-secundary-light;
@@ -135,7 +136,7 @@ body {
     }
 
     &.opened {
-        flex: 0 0 304px;
+        flex: 0 0 220px;
         transition: all 500ms;
         .nav__menu__link {
             color: $font-color;
@@ -288,6 +289,13 @@ body {
         color: #fff;
         vertical-align: middle;
         padding: $distance-m;
+    }
+}
+.panel__actions {
+    padding: $distance-m;
+    padding-bottom: 0;
+    & + .panel__content {
+        padding-top: 0;
     }
 }
 .panel__title {
@@ -455,6 +463,21 @@ body {
     .mat-datepicker-toggle {
         position: absolute;
         right: $distance-m;
+    }
+    .input-group__append {
+        position: absolute;
+        right: $distance-m;
+        bottom: 2px;
+        border-radius: 0 2px 2px 0;
+        margin-right: 2px;
+        overflow: hidden;
+
+        .append__icon {
+            background-color: $color-secundary;
+            color: #fff;
+            padding: 6px $distance-m;
+            display: inline-block;
+        }
     }
 }
 

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class AlimentacionsApiService {
 
-  readonly BASE_PATH = 'https://finances-personals-api.herokuapp.com/api/v1/alimentacions';
+  readonly BASE_PATH = '/api/v1/alimentacions';
 
   constructor(
     private http: HttpClient

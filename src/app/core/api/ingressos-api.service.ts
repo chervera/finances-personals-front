@@ -11,7 +11,7 @@ import { map, delay } from 'rxjs/operators';
 })
 export class IngressosApiService {
 
-  readonly BASE_PATH = "https://finances-personals-api.herokuapp.com/api/v1/ingressos";
+  readonly BASE_PATH = "/api/v1/ingressos";
 
   constructor(
     private http: HttpClient
