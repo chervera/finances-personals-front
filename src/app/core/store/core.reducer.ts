@@ -31,6 +31,7 @@ export interface UiState {
 export interface AuthState {
     user: User;
     token: string;
+    isLoading: boolean;
 }
 
 export interface MastersState {
@@ -49,7 +50,9 @@ export const initialState = {
         tipusAlimentacions: [],
         tipusConsums: []
     },
-    auth: {},
+    auth: {
+        isLoading: false
+    },
 };
 
 const _coreReducer = createReducer(initialState,
@@ -76,6 +79,9 @@ const _coreReducer = createReducer(initialState,
     ),
     on(CoreActions.setTipusConsum, (state, action) =>
         ({ ...state, masters: { ...state.masters, tipusConsums: action.payload } })
+    ),
+    on(CoreActions.requestLogin, (state) =>
+        ({ ...state, auth: { ...state.auth, isLoading: true } })
     ),
     on(CoreActions.setToken, (state, action) =>
         ({ ...state, auth: { ...state.auth, token: action.payload } })

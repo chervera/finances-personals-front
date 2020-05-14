@@ -8,8 +8,10 @@
         </div>
         <div class="panel__footer">
             <div class="page__actions">
-                <button class="page__action button" (click)="login()"
-                    [disabled]="!formComponent?.form.valid">Login</button>
+                <button class="page__action button" (click)="login()" [disabled]="!formComponent?.form.valid"
+                    [ngClass]="{'button--loading': selectAuthIsLoading$ | async}">
+                    Login
+                </button>
             </div>
         </div>
     </div>
