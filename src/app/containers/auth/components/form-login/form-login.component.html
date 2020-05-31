@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (keyup.enter)="onSubmit()">
     <div class="form form--column">
         <div class="input-group">
             <label for="username">Usuari</label>

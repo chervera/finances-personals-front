@@ -114,6 +114,16 @@ export class CoreEffects {
             ))
     ));
 
+    requestUpdateProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ActionTypes.REQUEST_UPDATE_PROFILE),
+            map((action: { payload }) => action.payload),
+            mergeMap((profile: User) => this.profileApi.updateMyProfile(profile).pipe(
+                map(() => CoreActions.updateProfileSucces()),
+                catchError(() => EMPTY))
+            )
+        ));
+
     requestLogout$ = createEffect(() => this.actions$.pipe(
         ofType(ActionTypes.REQUEST_LOGOUT),
         tap(() => this.auth.logout()),

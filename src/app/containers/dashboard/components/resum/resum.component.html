@@ -18,73 +18,76 @@
             <span class="table__cell table__cell--ghost"></span>
             <span class="table__cell table__cell--ghost"></span>
         </div>
-        <div class="table__item" *ngFor="let resum of resum.resumsMensuals">
-            <span class="table__cell table__cell--featured">{{resum.descriptionMonth}}</span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.despesesFixes | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.consums | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.alimentacio | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.despesesTotals | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--primary">
-                {{resum.ingressos | currency: 'EUR'}}
-            </span>
-            <span class="table__cell"
-                [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">
-                {{resum.total | currency: 'EUR'}}
-            </span>
-        </div>
-        <div class="table__footer">
-            <span class="table__cell">Mitja a mes actual</span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.mitjaDespesesFixesMesActual | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.mitjaConsumsMesActual | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.mitjaAlimentacionsMesActual | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.totalDespesesMesActual | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--primary">
-                {{resum.mitjaIngressosMesActual | currency: 'EUR'}}
-            </span>
-            <span class="table__cell"
-                [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">
-                {{resum.totalTotalsMesActual | currency: 'EUR'}}
-            </span>
-        </div>
-        <div class="table__footer">
-            <span class="table__cell">
-                Total
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.totalDespesesFixes | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.totalConsums | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.totalAlimentacions | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--secondary table__cell--centered">
-                {{resum.totalDespeses | currency: 'EUR'}}
-            </span>
-            <span class="table__cell table__cell--primary">
-                {{resum.totalIngressos | currency: 'EUR'}}
-            </span>
-            <span class="table__cell"
-                [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">
-                {{resum.totalTotals | currency: 'EUR'}}
-            </span>
-        </div>
+        <ng-container *ngIf="resum">
+            <div class="table__item" *ngFor="let resum of resum.resumsMensuals"
+                [ngClass]="{'table__item--featured': currentMonth == resum.numberMonth, 'table__item--disabled': resum.numberMonth > currentMonth}">
+                <span class="table__cell table__cell--featured">{{resum.descriptionMonth}}</span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.despesesFixes | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.consums | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.alimentacio | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary-featured table__cell--centered">
+                    {{resum.despesesTotals | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--primary table__cell--centered">
+                    {{resum.ingressos | currency: 'EUR'}}
+                </span>
+                <span class="table__cell"
+                    [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">
+                    {{resum.total | currency: 'EUR'}}
+                </span>
+            </div>
+            <div class="table__footer">
+                <span class="table__cell">Mitja a mes actual</span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.mitjaDespesesFixesMesActual | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.mitjaConsumsMesActual | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.mitjaAlimentacionsMesActual | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.totalDespesesMesActual | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--primary">
+                    {{resum.mitjaIngressosMesActual | currency: 'EUR'}}
+                </span>
+                <span class="table__cell"
+                    [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">
+                    {{resum.totalTotalsMesActual | currency: 'EUR'}}
+                </span>
+            </div>
+            <div class="table__footer">
+                <span class="table__cell">
+                    Total
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.totalDespesesFixes | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.totalConsums | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.totalAlimentacions | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--secondary table__cell--centered">
+                    {{resum.totalDespeses | currency: 'EUR'}}
+                </span>
+                <span class="table__cell table__cell--primary">
+                    {{resum.totalIngressos | currency: 'EUR'}}
+                </span>
+                <span class="table__cell"
+                    [ngClass]="{'table__cell--success': resum.total>0, 'table__cell--error': resum.total<0}">
+                    {{resum.totalTotals | currency: 'EUR'}}
+                </span>
+            </div>
+        </ng-container>
     </div>
 </div>

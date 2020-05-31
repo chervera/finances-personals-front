@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as CoreSelectors from 'src/app/core/store/core.selectors';
-import { map, filter, shareReplay, tap } from 'rxjs/operators';
-import { Resum, ResumService, ResumAnual } from 'src/app/core/services/resum.service';
-import { zip, Observable, combineLatest } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
+import { ResumService, ResumAnual } from 'src/app/core/services/resum.service';
+import { Observable, combineLatest } from 'rxjs';
 import { DespesaFixa } from 'src/app/core/model/despesa-fixa.model';
 import { Ingres } from 'src/app/core/model/ingres.model';
 import { Alimentacio } from 'src/app/core/model/alimentacio.model';
@@ -35,7 +35,6 @@ export class DashboardContainer implements OnInit {
     this.alimentacions$
   ).pipe(
     map(([despesesFixes, ingressos, consums, alimentacions]: [DespesaFixa[], Ingres[], Consum[], Alimentacio[]]) => ResumService.generateResum(ingressos, despesesFixes, consums, alimentacions)),
-    tap((data) => console.log(data))
   );
 
   constructor(

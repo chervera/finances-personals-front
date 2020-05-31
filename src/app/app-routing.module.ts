@@ -9,6 +9,11 @@ const routes: Routes = [
     loadChildren: () => import('./containers/auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'masters',
+    canLoad: [AuthGuardService],
+    loadChildren: () => import('./containers/masters/masters.module').then(m => m.MastersModule)
+  },
+  {
     path: 'ingressos',
     canLoad: [AuthGuardService],
     loadChildren: () => import('./containers/ingressos/ingressos.module').then(m => m.IngressosModule)

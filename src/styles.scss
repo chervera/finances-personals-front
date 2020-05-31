@@ -16,13 +16,14 @@ $color-secundary-light: #f6f6f6;
 $color-3: #a7e4ff;
 $color-4: #fdc2e1;
 $color-5: #fcdfc7;
+$color-6: #fbcda8;
 $color-success: #bafec9;
 $color-disabled: #ddd;
 $color-error: #db2516;
 
 @mixin background-gradient {
     background-image: linear-gradient(90deg, $color-secundary-light 0px, #fff 40px, $color-secundary-light 80px);
-    background-size: 80vw;
+    background-size: 40vw;
 }
 
 @mixin animate-ghost-line {
@@ -79,6 +80,7 @@ body {
     padding: $distance-s $distance-m;
     font-size: $font-size-m;
     text-decoration: none;
+    outline: none;
 
     &.button--secondary {
         background-color: lighten($color-main, 20%);
@@ -97,6 +99,12 @@ body {
         background-color: darken($color-main, 10%);
         text-decoration: none;
     }
+
+    &--loading {
+        background: $color-3;
+        color: $font-color;
+        @include animate-ghost-line;
+    }
 }
 
 .main-wrapper {
@@ -105,10 +113,17 @@ body {
 
 .nav {
     padding-top: $distance-m;
-    width: 94px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: -100%;
+    background: #fff;
+    width: 100%;
+    z-index: 2;
     transition: all 500ms;
     overflow: hidden;
-    flex-basis: 1;
     .nav__menu__link {
         color: $font-color;
         text-decoration: none;
@@ -118,6 +133,7 @@ body {
         color: transparent;
         white-space: nowrap;
         transition: all 500ms;
+        width: 100%;
 
         &:hover {
             background: $color-secundary-light;
@@ -136,7 +152,7 @@ body {
     }
 
     &.opened {
-        width: 304px;
+        margin-left: 0%;
         transition: all 500ms;
         .nav__menu__link {
             color: $font-color;
@@ -150,7 +166,7 @@ body {
 }
 
 .page-wrapper {
-    width: 100%;
+    flex: 1 1;
 }
 
 .header {
@@ -158,6 +174,7 @@ body {
     padding: $distance-l;
     color: #fff;
     position: relative;
+    z-index: 3;
 }
 
 .header__menu-button {
@@ -218,6 +235,7 @@ body {
     position: absolute;
     right: $distance-m;
     line-height: $font-size-xl;
+    display: none;
 }
 
 .header__title {
@@ -291,6 +309,13 @@ body {
         padding: $distance-m;
     }
 }
+.panel__actions {
+    padding: $distance-m;
+    padding-bottom: 0;
+    & + .panel__content {
+        padding-top: 0;
+    }
+}
 .panel__title {
     font-size: $font-size-m;
     font-weight: 600;
@@ -345,11 +370,6 @@ body {
     }
 }
 
-.table__item {
-    display: table-row;
-    border-bottom: 1px solid #ececec;
-}
-
 .table__cell {
     display: table-cell;
     padding: $distance-s $distance-m;
@@ -373,6 +393,9 @@ body {
     &--secondary {
         background: $color-5;
     }
+    &--secondary-featured {
+        background: $color-6;
+    }
     &--success {
         background: $color-success;
     }
@@ -390,6 +413,22 @@ body {
             background: #585858;
             height: $font-size-m;
             @include animate-ghost-line;
+        }
+    }
+}
+
+.table__item {
+    display: table-row;
+    border-bottom: 1px solid #ececec;
+
+    &--featured {
+        border: 2px solid $color-main;
+        color: $font-color;
+    }
+    &--disabled {
+        .table__cell {
+            background: $color-secundary-light;
+            color: $font-color;
         }
     }
 }
@@ -457,6 +496,21 @@ body {
         position: absolute;
         right: $distance-m;
     }
+    .input-group__append {
+        position: absolute;
+        right: $distance-m;
+        bottom: 2px;
+        border-radius: 0 2px 2px 0;
+        margin-right: 2px;
+        overflow: hidden;
+
+        .append__icon {
+            background-color: $color-secundary;
+            color: #fff;
+            padding: 6px $distance-m;
+            display: inline-block;
+        }
+    }
 }
 
 @media (min-width: 575.98px) {
@@ -468,6 +522,16 @@ body {
 
 // Medium devices (tablets, less than 992px)
 @media (min-width: 991.98px) {
+    .nav,
+    .nav.opened {
+        flex: 0 0 220px;
+        position: static;
+        margin-left: 0;
+        .nav__menu__link {
+            color: $font-color;
+        }
+    }
+
     .form {
         flex-direction: row;
     }
@@ -475,6 +539,14 @@ body {
     .input-group {
         flex: 1 1 25%;
         max-width: 25%;
+    }
+
+    .header__menu-button {
+        display: none;
+    }
+
+    .header__user {
+        display: inline-block;
     }
 }
 

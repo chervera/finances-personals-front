@@ -32,7 +32,6 @@ export class FormProfileComponent implements OnInit, OnChanges {
 
   createForm(): FormGroup {
     return this.fb.group({
-
       name: ['', Validators.required],
       surname: ['', Validators.required],
     });
