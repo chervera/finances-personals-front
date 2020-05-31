@@ -113,7 +113,15 @@ body {
 
 .nav {
     padding-top: $distance-m;
-    flex: 0 0 85px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin-left: -100%;
+    background: #fff;
+    width: 100%;
+    z-index: 2;
     transition: all 500ms;
     overflow: hidden;
     .nav__menu__link {
@@ -144,7 +152,7 @@ body {
     }
 
     &.opened {
-        flex: 0 0 220px;
+        margin-left: 0%;
         transition: all 500ms;
         .nav__menu__link {
             color: $font-color;
@@ -166,6 +174,7 @@ body {
     padding: $distance-l;
     color: #fff;
     position: relative;
+    z-index: 3;
 }
 
 .header__menu-button {
@@ -226,6 +235,7 @@ body {
     position: absolute;
     right: $distance-m;
     line-height: $font-size-xl;
+    display: none;
 }
 
 .header__title {
@@ -512,6 +522,16 @@ body {
 
 // Medium devices (tablets, less than 992px)
 @media (min-width: 991.98px) {
+    .nav,
+    .nav.opened {
+        flex: 0 0 220px;
+        position: static;
+        margin-left: 0;
+        .nav__menu__link {
+            color: $font-color;
+        }
+    }
+
     .form {
         flex-direction: row;
     }
@@ -519,6 +539,14 @@ body {
     .input-group {
         flex: 1 1 25%;
         max-width: 25%;
+    }
+
+    .header__menu-button {
+        display: none;
+    }
+
+    .header__user {
+        display: inline-block;
     }
 }
 

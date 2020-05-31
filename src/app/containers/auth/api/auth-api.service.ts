@@ -18,7 +18,6 @@ export class AuthApiService {
   login(username: string, password: string): Observable<{ access_token: string }> {
     return this.http.post<{ access_token: string }>(this.BASE_PATH + 'login', { username, password }).pipe(
       shareReplay(1),
-      delay(5000)
     );
   }
 }

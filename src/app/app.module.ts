@@ -36,7 +36,7 @@ registerLocaleData(localeEs, 'es-ES');
       },
       multi: true,
       deps: [Store, AuthService]
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

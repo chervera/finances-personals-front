@@ -36,4 +36,8 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
+  closeMenu() {
+    this.store.dispatch(toggleIsMenuShowed());
+  }
+
 }

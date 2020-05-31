@@ -5,25 +5,29 @@
     </div>
     <ul class="nav__menu">
       <li class="nav__menu__item">
-        <a routerLink="/dashboard" routerLinkActive="active" class="nav__menu__link">Dashboard</a>
+        <a routerLink="/dashboard" (click)="closeMenu()" routerLinkActive="active" class="nav__menu__link">Dashboard</a>
       </li>
       <li>
-        <a routerLink="/despeses-fixes" routerLinkActive="active" class="nav__menu__link">Despeses Fixes</a>
+        <a routerLink="/despeses-fixes" (click)="closeMenu()" routerLinkActive="active" class="nav__menu__link">Despeses
+          Fixes</a>
       </li>
       <li>
-        <a routerLink="/consums" routerLinkActive="active" class="nav__menu__link">Consums</a>
+        <a routerLink="/consums" (click)="closeMenu()" routerLinkActive="active" class="nav__menu__link">Consums</a>
       </li>
       <li>
-        <a routerLink="/alimentacions" routerLinkActive="active" class="nav__menu__link">Alimentacio</a>
+        <a routerLink="/alimentacions" (click)="closeMenu()" routerLinkActive="active"
+          class="nav__menu__link">Alimentacio</a>
       </li>
       <li>
-        <a routerLink="/ingressos" routerLinkActive="active" class="nav__menu__link">Ingressos</a>
+        <a routerLink="/ingressos" (click)="closeMenu()" routerLinkActive="active" class="nav__menu__link">Ingressos</a>
       </li>
       <li>
-        <a routerLink="/masters" routerLinkActive="active" class="nav__menu__link">Dades mestres</a>
+        <a routerLink="/masters" (click)="closeMenu()" routerLinkActive="active" class="nav__menu__link">Dades
+          mestres</a>
       </li>
       <li>
-        <a routerLink="/perfil" routerLinkActive="active" class="nav__menu__link">El meu perfil</a>
+        <a routerLink="/perfil" (click)="closeMenu()" routerLinkActive="active" class="nav__menu__link">El meu
+          perfil</a>
       </li>
       <li>
         <a (click)="logout()" class="nav__menu__link">Logout</a>

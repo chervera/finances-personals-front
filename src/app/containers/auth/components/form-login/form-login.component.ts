@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/core/model/user.model';
+
 
 @Component({
   selector: 'app-form-login',
@@ -11,6 +12,8 @@ export class FormLoginComponent implements OnInit {
 
   public form: FormGroup;
 
+  @Output() login: EventEmitter<any> = new EventEmitter();
+
   constructor(
     private fb: FormBuilder
   ) {
@@ -18,6 +21,10 @@ export class FormLoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    this.login.emit();
   }
 
   createForm(): FormGroup {
