@@ -50,7 +50,6 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
       },
       series: this.generateSeriesFromResum(resum)
     };
-    console.log(this.chartOptions);
   }
 
   private generateSeriesFromResum(resum: Resum<TipusConsum>) {

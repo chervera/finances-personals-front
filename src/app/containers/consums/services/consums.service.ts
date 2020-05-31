@@ -24,7 +24,6 @@ export class ConsumsService {
     });
 
     resum.stats = ConsumsService.generateStats(resum);
-    console.log(resum);
     return resum;
   }
 
