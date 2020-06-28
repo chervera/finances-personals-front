@@ -1,2 +1,4 @@
-<highcharts-chart *ngIf="resum" [Highcharts]="Highcharts" [options]="chartOptions"
-    style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+<div class="chart">
+    <highcharts-chart *ngIf="resum" class="chart__container" [Highcharts]="Highcharts" [options]="chartOptions">
+    </highcharts-chart>
+</div>

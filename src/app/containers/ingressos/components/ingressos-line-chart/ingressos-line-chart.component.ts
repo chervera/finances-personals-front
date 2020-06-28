@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import { DateService } from 'src/app/core/services/date.service';
-import { Resum, ResumLine } from 'src/app/core/model/resum.model';
+import { Resum, ResumLine, ResumWithDefaultType } from 'src/app/core/model/resum.model';
 import { TipusConsum } from 'src/app/core/model/tipus-consum.model';
 import { Chart } from 'src/app/core/components/chart';
 
 
 @Component({
-  selector: 'app-consums-line-chart',
-  templateUrl: './consums-line-chart.component.html',
+  selector: 'app-ingressos-line-chart',
+  templateUrl: './ingressos-line-chart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ConsumsLineChartComponent extends Chart implements OnInit, OnChanges {
+export class IngressosLineChartComponent extends Chart implements OnInit, OnChanges {
 
-  @Input() resum: Resum<TipusConsum>;
+  @Input() resum: ResumWithDefaultType;
 
   readonly Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options;
@@ -31,7 +31,7 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
     }
   }
 
-  private constructChart(resum: Resum<TipusConsum>) {
+  private constructChart(resum: ResumWithDefaultType) {
     this.chartOptions = {
       title: null,
       xAxis: {
@@ -48,37 +48,27 @@ export class ConsumsLineChartComponent extends Chart implements OnInit, OnChange
           }
         }
       },
-      series: this.generateSeriesFromResum(resum)
+      series: this.generateSeriesFromResum(resum),
+      tooltip: {
+        pointFormatter: function () {
+          return this.y.toFixed(2) + '€';
+        }
+      }
     };
   }
 
-  private generateSeriesFromResum(resum: Resum<TipusConsum>) {
+  private generateSeriesFromResum(resum: ResumWithDefaultType) {
     const series = [];
-
-    resum.types.forEach((tipus: TipusConsum) => {
-      const serie = {
-        data: [],
-        type: this.SERIE_TYPE_LINE,
-        name: tipus.descripcio
-      }
-
-      resum.lines.forEach((line: ResumLine) => {
-        serie.data.push(line.totals.get(tipus.id).totalAmount);
-      });
-      series.push(serie);
-    });
-
-    const totalSerie = {
+    const serie = {
       data: [],
       type: this.SERIE_TYPE_LINE,
-      name: 'Total'
-    };
+      name: 'Ingressos'
+    }
 
     resum.lines.forEach((line: ResumLine) => {
-      totalSerie.data.push(line.total);
-    })
-
-    series.push(totalSerie);
+      serie.data.push(line.totals.get(0).totalAmount);
+    });
+    series.push(serie);
 
     return series;
   }

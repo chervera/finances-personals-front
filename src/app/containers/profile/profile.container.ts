@@ -38,7 +38,6 @@ export class ProfileContainer implements OnInit {
 
   save() {
     const profile = this.formComponent.getValue();
-    console.log(profile);
     this.store.dispatch(requestUpdateProfile({ payload: profile }));
   }
 

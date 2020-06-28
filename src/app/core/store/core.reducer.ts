@@ -41,7 +41,7 @@ export interface MastersState {
 
 export const initialState = {
     ui: {
-        isMenuShowed: true
+        isMenuShowed: false
     },
     mainFilter: {
         year: new Date().getFullYear(),

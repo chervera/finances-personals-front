@@ -10,6 +10,9 @@ import { Filter } from 'src/app/shared/filter/filter.model';
 import { FilterComponent } from 'src/app/shared/filter/filter.component';
 import { Ingres } from 'src/app/core/model/ingres.model';
 import { requestDeleteIngres } from './store/ingressos.actions';
+import { map, tap } from 'rxjs/operators';
+import { IngressosService } from './services/ingressos.service';
+import { ResumLine, Resum, ResumWithDefaultType } from 'src/app/core/model/resum.model';
 
 
 @Component({
@@ -21,7 +24,13 @@ export class IngressosContainer implements OnInit {
 
   @ViewChild(FilterComponent) filterComponent;
 
-  ingressos$: Observable<Ingres[]> = this.store.select(CoreSelectors.selectIngressos);
+  ingressos$: Observable<Ingres[]> = this.store.select(CoreSelectors.selectIngressos).pipe(
+    map(ingresos => ingresos.slice(0, 25)),
+    map(ingresos => ingresos.reverse()),
+  )
+  resum$: Observable<ResumWithDefaultType> = this.store.select(CoreSelectors.selectIngressos).pipe(
+    map((ingressos: Ingres[]) => IngressosService.generateResumLines(ingressos)),
+  );
   filter$: Observable<Filter> = this.store.select(CoreSelectors.selectMainFilter);
 
   constructor(

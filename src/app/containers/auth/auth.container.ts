@@ -17,9 +17,7 @@ export class AuthContainer implements OnInit {
 
   public isLoading = false;
 
-  selectAuthIsLoading$ = this.store.select(selectAuthIsLoading).pipe(
-    tap((event) => console.log('carles'))
-  );
+  selectAuthIsLoading$ = this.store.select(selectAuthIsLoading);
 
   @ViewChild(FormLoginComponent) formComponent;
 

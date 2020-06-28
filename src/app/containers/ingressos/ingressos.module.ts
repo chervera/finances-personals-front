@@ -9,13 +9,15 @@ import { IngressosRoutingModule } from './ingressos-routing.module';
 import * as reducer from './store/ingressos.reducer';
 import { IngressosEffects } from './store/ingressos.effects';
 import { IngressosListComponent } from './components/ingressos-list/ingressos-list.component';
+import { IngressosLineChartComponent } from './components/ingressos-line-chart/ingressos-line-chart.component';
 
 
 
 @NgModule({
   declarations: [
     IngressosContainer,
-    IngressosListComponent
+    IngressosListComponent,
+    IngressosLineChartComponent
   ],
   imports: [
     CommonModule,
