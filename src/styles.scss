@@ -331,6 +331,9 @@ body {
 }
 
 .table__wrapper {
+    overflow-x: auto;
+    width: 100%;
+    display: block;
 }
 
 .table__wrapper_header {
@@ -510,6 +513,15 @@ body {
             padding: 6px $distance-m;
             display: inline-block;
         }
+    }
+}
+
+.chart {
+    width: 100%;
+
+    &__container {
+        width: 100%;
+        display: block;
     }
 }
 

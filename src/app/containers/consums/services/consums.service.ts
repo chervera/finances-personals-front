@@ -15,7 +15,6 @@ export class ConsumsService {
     const resum: Resum<TipusConsum> = new Resum();
     resum.types = tipusConsums;
     resum.lines = ConsumsService.initializeResumLines(tipusConsums);
-
     consums.forEach(consum => {
       const month = consum.data.getMonth();
       const totalAmount = resum.lines[month].totals.get(consum.tipusConsumId).totalAmount + +consum.import;

@@ -25,7 +25,10 @@ export class AlimentacionsContainer implements OnInit {
 
   @ViewChild(FilterComponent) filterComponent;
 
-  alimentacions$: Observable<Alimentacio[]> = this.store.select(CoreSelectors.selectAlimentacions);
+  alimentacions$: Observable<Alimentacio[]> = this.store.select(CoreSelectors.selectAlimentacions).pipe(
+    map(alimentacios => alimentacios.slice(0, 25)),
+    map(alimentacios => alimentacios.reverse()),
+  )
   tipusAlimentacions$: Observable<TipusAlimentacio[]> = this.store.select(CoreSelectors.selectTipusAlimentacions);
   resum$: Observable<Resum<TipusAlimentacio>> = combineLatest(
     this.alimentacions$,

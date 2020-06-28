@@ -17,6 +17,14 @@
         </div>
     </div>
     <div class="panel">
+        <div class="panel__header">
+            <span class="panel__title">Resum ingressos</span>
+        </div>
+        <div class="panel__content">
+            <app-ingressos-line-chart [resum]="resum$ | async"></app-ingressos-line-chart>
+        </div>
+    </div>
+    <div class="panel">
         <div class="panel__content">
             <app-ingressos-list [ingressos]="ingressos$ | async" (edit)="onEdit($event)" (delete)="onDelete($event)">
             </app-ingressos-list>
