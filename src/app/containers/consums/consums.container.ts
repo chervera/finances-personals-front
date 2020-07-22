@@ -27,10 +27,14 @@ export class ConsumsContainer implements OnInit {
 
   @ViewChild(FilterComponent) filterComponent;
 
-  consums$: Observable<Consum[]> = this.store.select(CoreSelectors.selectConsums).pipe(
-    map(consums => consums.slice(0, 25)),
+  consums$: Observable<Consum[]> = this.store.select(CoreSelectors.selectConsums);
+
+  lastConsums$: Observable<Consum[]> = this.consums$.pipe(
     map(consums => consums.reverse()),
+    map(consums => consums.slice(0, 25)),
   );
+
+
   tipusConsums$: Observable<TipusConsum[]> = this.store.select(CoreSelectors.selectTipusConsums);
   resum$: Observable<Resum<TipusConsum>> = combineLatest(
     this.consums$,

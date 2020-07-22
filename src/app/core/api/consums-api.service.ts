@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { Ingres } from '../model/ingres.model';
 import { Consum } from '../model/consum.model';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsumsApiService {
 
-  readonly BASE_PATH = '/api/v1/consums';
+  readonly BASE_PATH = environment.apiRootPath + '/api/v1/consums';
 
   constructor(
     private http: HttpClient

@@ -4,6 +4,7 @@ import { DespesaFixa } from '../model/despesa-fixa.model';
 import { HttpClient } from '@angular/common/http';
 import { Ingres } from '../model/ingres.model';
 import { map, delay } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -11,7 +12,7 @@ import { map, delay } from 'rxjs/operators';
 })
 export class IngressosApiService {
 
-  readonly BASE_PATH = "/api/v1/ingressos";
+  readonly BASE_PATH = environment.apiRootPath + '/api/v1/ingressos';
 
   constructor(
     private http: HttpClient

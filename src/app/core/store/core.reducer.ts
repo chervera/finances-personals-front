@@ -30,7 +30,7 @@ export interface UiState {
 
 export interface AuthState {
     user: User;
-    token: string;
+    token?: string;
     isLoading: boolean;
 }
 
@@ -39,19 +39,20 @@ export interface MastersState {
     tipusConsums: TipusConsum[];
 }
 
-export const initialState = {
+export const initialState: CoreState = {
     ui: {
         isMenuShowed: false
     },
     mainFilter: {
-        year: new Date().getFullYear(),
+        year: 13,
     },
     masters: {
         tipusAlimentacions: [],
         tipusConsums: []
     },
     auth: {
-        isLoading: false
+        isLoading: false,
+        user: null,
     },
 };
 

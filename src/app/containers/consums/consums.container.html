@@ -37,7 +37,7 @@
             <span class="panel__title">Ultimes despeses en consums</span>
         </div>
         <div class="panel__content">
-            <app-consums-list [consums]="consums$ | async" (edit)="onEdit($event)" (delete)="onDelete($event)">
+            <app-consums-list [consums]="lastConsums$ | async" (edit)="onEdit($event)" (delete)="onDelete($event)">
             </app-consums-list>
         </div>
     </div>

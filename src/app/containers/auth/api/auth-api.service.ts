@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { User } from 'src/app/core/model/user.model';
 import { shareReplay, delay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthApiService {
 
-  readonly BASE_PATH = '/api/v1/auth/';
+  readonly BASE_PATH = environment.apiRootPath + '/api/v1/auth/';
 
   constructor(
     private http: HttpClient

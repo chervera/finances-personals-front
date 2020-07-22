@@ -4,13 +4,14 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, APP_BASE_HREF } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { Store } from '@ngrx/store';
 import { AppState } from './core/store/core.reducer';
 import { initiateTokenFromStorage } from './core/store/core.actions';
 import { AuthService } from './containers/auth/services/auth.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeEs, 'es-ES');
 

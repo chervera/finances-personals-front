@@ -8,11 +8,10 @@
         </div>
         <div class="panel__footer">
             <div class="page__actions">
-                <button class="page__action button" (click)="login()" (login)="login()"
+                <input type="submit" class="page__action button" (click)="login()" (login)="login()"
                     [disabled]="!formComponent?.form.valid"
-                    [ngClass]="{'button--loading': selectAuthIsLoading$ | async}">
-                    Login
-                </button>
+                    [ngClass]="{'button--loading': selectAuthIsLoading$ | async}" />
+
             </div>
         </div>
     </div>

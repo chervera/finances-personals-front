@@ -3,13 +3,14 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Alimentacio } from '../model/alimentacio.model';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlimentacionsApiService {
 
-  readonly BASE_PATH = '/api/v1/alimentacions';
+  readonly BASE_PATH = environment.apiRootPath + '/api/v1/alimentacions';
 
   constructor(
     private http: HttpClient

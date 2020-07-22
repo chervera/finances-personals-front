@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { DespesaFixa } from '../model/despesa-fixa.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DespesesFixesApiService {
 
-  readonly BASE_PATH = "/api/v1/despeses-fixes";
+  readonly BASE_PATH = environment.apiRootPath + '/api/v1/despeses-fixes';
 
   constructor(
     private http: HttpClient

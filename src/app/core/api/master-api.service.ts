@@ -6,6 +6,7 @@ import { Ingres } from '../model/ingres.model';
 import { map, delay } from 'rxjs/operators';
 import { TipusConsum } from '../model/tipus-consum.model';
 import { TipusAlimentacio } from '../model/tipus-alimentacio.model';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import { TipusAlimentacio } from '../model/tipus-alimentacio.model';
 })
 export class MastersApiService {
 
-  readonly BASE_PATH = '/api/v1/masters';
+  readonly BASE_PATH = environment.apiRootPath + '/api/v1/masters';
   readonly BASE_PATH_TIPUS_CONSUM = '/tipus-consums';
   readonly BASE_PATH_TIPUS_ALIMENTACIO = '/tipus-alimentacions';
 

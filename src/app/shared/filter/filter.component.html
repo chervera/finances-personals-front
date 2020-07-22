@@ -11,6 +11,7 @@
             <label for="year">Any</label>
             <select formControlName="year">
                 <option value="">Tots els anys</option>
+                <option value="13">Ultims 12 mesos</option>
                 <option *ngFor="let year of years" value="{{year}}">{{year}}</option>
             </select>
         </div>

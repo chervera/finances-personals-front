@@ -1,4 +1,4 @@
 export interface Filter {
-    month: number;
-    year: number;
+    month?: number;
+    year?: number;
 }
